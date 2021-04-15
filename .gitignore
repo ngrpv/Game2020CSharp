@@ -29,5 +29,6 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
 .idea/
+WindowsFormsApp1/.idea/
 #Nuget packages folder
 packages/
