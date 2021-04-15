@@ -18,6 +18,7 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+*.idea
 [Bb]in
 [Dd]ebug*/
 *.lib
@@ -27,6 +28,6 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
-*.idea
+.idea/
 #Nuget packages folder
 packages/
