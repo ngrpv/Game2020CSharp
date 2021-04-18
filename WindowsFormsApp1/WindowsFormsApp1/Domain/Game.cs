@@ -1,8 +1,16 @@
 ﻿namespace WindowsFormsApp1.Domain
 {
-    class Game
+    public enum GameStage
     {
-        
+        NotStarted,
+        Selection,
+        Finished
+    }
+    
+    public class Game
+    {
+        private GameStage stage = GameStage.NotStarted;
+        private Player _player;
     }
 
     class Car
