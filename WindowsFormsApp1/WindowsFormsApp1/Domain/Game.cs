@@ -1,41 +1,26 @@
-﻿namespace WindowsFormsApp1.Domain
+﻿using System;
+
+namespace WindowsFormsApp1.Domain
 {
-    public enum GameStage
-    {
-        NotStarted,
-        Selection,
-        Finished
-    }
-    
     public class Game
     {
         private GameStage stage = GameStage.NotStarted;
         private Player _player;
-    }
+        private GameOptions options = new GameOptions();
 
-    class Car
-    {
-        public double Speed { get;}
-        public double Power { get; }
-        public Car( double speed, double power)
+        public event Action<GameStage> StageChanged;
+
+        public void SetVolume(int volume)
         {
-            Speed = speed;
-            Power = power;
+            options.Volume = volume;
         }
-    }
-
-    class Terrain
-    {
         
-    }
-
-    class Player
-    {
-        public string Name { get; set; }
-    }
-
-    class Wheel
-    {
+        private void ChangeStage(GameStage stage)
+        {
+            this.stage = stage;
+            StageChanged?.Invoke(stage);
+        }
         
+
     }
 }

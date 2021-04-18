@@ -31,55 +31,57 @@ namespace WindowsFormsApp1.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.optionsButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // startButton
             // 
-            this.button1.Location = new System.Drawing.Point(125, 43);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(157, 36);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Начать игру";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.startButton.Location = new System.Drawing.Point(125, 43);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(157, 36);
+            this.startButton.TabIndex = 0;
+            this.startButton.Text = "Начать игру";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
-            // button2
+            // optionsButton
             // 
-            this.button2.Location = new System.Drawing.Point(125, 85);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(157, 36);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Настройки";
-            this.button2.UseVisualStyleBackColor = true;
+            this.optionsButton.Location = new System.Drawing.Point(125, 85);
+            this.optionsButton.Name = "optionsButton";
+            this.optionsButton.Size = new System.Drawing.Size(157, 36);
+            this.optionsButton.TabIndex = 1;
+            this.optionsButton.Text = "Настройки";
+            this.optionsButton.UseVisualStyleBackColor = true;
+            this.optionsButton.Click += new System.EventHandler(this.optionsButton_Click);
             // 
-            // button3
+            // exitButton
             // 
-            this.button3.Location = new System.Drawing.Point(125, 127);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(157, 36);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Выход";
-            this.button3.UseVisualStyleBackColor = true;
+            this.exitButton.Location = new System.Drawing.Point(125, 127);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(157, 36);
+            this.exitButton.TabIndex = 2;
+            this.exitButton.Text = "Выход";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // MenuControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.optionsButton);
+            this.Controls.Add(this.startButton);
             this.Name = "MenuControl";
             this.Size = new System.Drawing.Size(463, 215);
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button optionsButton;
+        private System.Windows.Forms.Button exitButton;
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button startButton;
 
         #endregion
     }
