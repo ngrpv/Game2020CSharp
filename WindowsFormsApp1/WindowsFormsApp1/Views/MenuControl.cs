@@ -20,9 +20,23 @@ namespace WindowsFormsApp1.Views
             this.game = game;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            
         }
+        
+        private void optionsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+       
     }
 }
