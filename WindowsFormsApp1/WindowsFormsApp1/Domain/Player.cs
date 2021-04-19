@@ -1,7 +1,9 @@
 ﻿namespace WindowsFormsApp1.Domain
 {
-    class Player
+    public class Player
     {
         public string Name { get; set; }
+
+        public Race Record { get; set; }
     }
 }
