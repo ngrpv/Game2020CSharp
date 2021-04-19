@@ -15,7 +15,7 @@ namespace WindowsFormsApp1.Domain
             options.Volume = volume;
         }
         
-        private void ChangeStage(GameStage stage)
+        public void ChangeStage(GameStage stage)
         {
             this.stage = stage;
             StageChanged?.Invoke(stage);

@@ -8,13 +8,13 @@ namespace WindowsFormsApp1.Views
     {
         private Game game;
         //private MenuControl menuControl;
-        private OptionsControl optionsControl;
-       // private OptionsControl optionsControlControl;
+        //private OptionsControl optionsControl;
         public MainForm()
         {
             InitializeComponent();
             game = new Game();
             game.StageChanged += Game_OnStageChanged;
+            game.ChangeStage(default);
         }
         
 
@@ -29,6 +29,8 @@ namespace WindowsFormsApp1.Views
                     //ShowFinishedScreen();
                     break;
                 case GameStage.NotStarted:
+                    ShowStartScreen();
+                    break;
                 default:
                     ShowStartScreen();
                     break;

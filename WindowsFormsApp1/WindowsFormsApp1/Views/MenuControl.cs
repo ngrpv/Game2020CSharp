@@ -28,7 +28,7 @@ namespace WindowsFormsApp1.Views
         private void optionsButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            
+            game.ChangeStage(GameStage.Options);
         }
 
         private void exitButton_Click(object sender, EventArgs e)
