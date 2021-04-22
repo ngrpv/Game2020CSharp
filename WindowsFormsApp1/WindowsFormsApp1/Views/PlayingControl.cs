@@ -14,5 +14,10 @@ namespace WindowsFormsApp1.Views
         {
             throw new System.NotImplementedException();
         }
+
+        private void Car_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

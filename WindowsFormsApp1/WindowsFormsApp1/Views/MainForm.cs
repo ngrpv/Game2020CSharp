@@ -8,8 +8,6 @@ namespace WindowsFormsApp1.Views
     {
         private Game game;
 
-        //private MenuControl menuControl;
-        //private OptionsControl optionsControl;
         public MainForm()
         {
             InitializeComponent();
@@ -32,6 +30,10 @@ namespace WindowsFormsApp1.Views
                 case GameStage.NotStarted:
                     ShowStartScreen();
                     break;
+                case GameStage.Selection:
+                    break;
+                case GameStage.Playing:
+                    break;
                 default:
                     ShowStartScreen();
                     break;
@@ -41,8 +43,8 @@ namespace WindowsFormsApp1.Views
         private void ShowStartScreen()
         {
             HideScreens();
-            menuControl1.Configure(game);
-            menuControl1.Show();
+            menuControl.Configure(game);
+            menuControl.Show();
         }
 
         private void ShowOptionsScreen()
@@ -51,10 +53,17 @@ namespace WindowsFormsApp1.Views
             optionsControl1.Configure(game);
             optionsControl1.Show();
         }
+        
+        /*private void ShowPlayingScreen()
+        {
+            HideScreens();
+            playingControl.Configure(game);
+            optionsControl1.Show();
+        }*/
 
         private void HideScreens()
         {
-            menuControl1.Hide();
+            menuControl.Hide();
             optionsControl1.Hide();
         }
 

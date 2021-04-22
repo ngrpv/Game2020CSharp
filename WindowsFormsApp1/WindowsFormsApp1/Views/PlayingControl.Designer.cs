@@ -50,11 +50,12 @@ namespace WindowsFormsApp1.Views
             // 
             // Car
             // 
-            this.Car.Location = new System.Drawing.Point(291, 435);
+            this.Car.Location = new System.Drawing.Point(322, 180);
             this.Car.Name = "Car";
             this.Car.Size = new System.Drawing.Size(95, 131);
             this.Car.TabIndex = 1;
             this.Car.TabStop = false;
+            this.Car.Click += new System.EventHandler(this.Car_Click);
             // 
             // PlayingControl
             // 

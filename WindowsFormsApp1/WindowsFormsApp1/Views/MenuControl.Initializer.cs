@@ -1,22 +1,15 @@
-﻿using System;
-using System.ComponentModel;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace WindowsFormsApp1.Views
 {
     partial class MenuControl
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         //private IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         /*protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -29,9 +22,9 @@ namespace WindowsFormsApp1.Views
         {
             var buttons = new[]
             {
-                startButton = new Button() {Text = "Start Game", Dock = DockStyle.Fill},
-                optionsButton = new Button() {Text = "Options", Dock = DockStyle.Fill,},
-                exitButton = new Button() {Text = "Exit", Dock = DockStyle.Fill}
+                startButton = new Button() {Text = @"Start Game", Dock = DockStyle.Fill},
+                optionsButton = new Button() {Text = @"Options", Dock = DockStyle.Fill,},
+                exitButton = new Button() {Text = @"Exit", Dock = DockStyle.Fill}
             };
             
             // SuspendLayout();

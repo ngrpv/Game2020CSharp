@@ -1,7 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1.Views
@@ -13,8 +10,9 @@ namespace WindowsFormsApp1.Views
         /// </summary>
         private IContainer components = null;
         
-        private WindowsFormsApp1.Views.OptionsControl optionsControl1;
-        private WindowsFormsApp1.Views.MenuControl menuControl1;
+        private OptionsControl optionsControl1;
+        private MenuControl menuControl;
+        private PlayingControl playingControl;
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -22,42 +20,24 @@ namespace WindowsFormsApp1.Views
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
-
             base.Dispose(disposing);
         }
 
         private void InitializeComponent()
         {
-            menuControl1 = new MenuControl()
-            {
-                Dock = DockStyle.Fill,
-                Name = "MenuControl"
-            };
-
-            optionsControl1 = new OptionsControl()
-            {
-                Dock = DockStyle.Fill,
-                Name = "OPtions",
-                Visible = false
-            };
-            
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            menuControl = new MenuControl(){ Dock = DockStyle.Fill };
+            optionsControl1 = new OptionsControl(){Dock = DockStyle.Fill,Visible = false};
             var table = new TableLayoutPanel();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             table.Dock = DockStyle.Fill;
-            table.Controls.Add(menuControl1,0,0);
-            table.Controls.Add(new Button(),1,0);
-            this.Controls.Add(table);
-            
+            table.Controls.Add(menuControl,0,0);
+            table.Controls.Add(optionsControl1,0,0);
+            Controls.Add(table);
         }
-
-        
 
         /*#region Windows Form Designer generated code
 

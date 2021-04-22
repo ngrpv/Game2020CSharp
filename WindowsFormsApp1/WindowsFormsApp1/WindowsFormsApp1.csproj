@@ -61,7 +61,7 @@
         <Compile Include="Views\MainForm.cs">
           <SubType>Form</SubType>
         </Compile>
-        <Compile Include="Views\MainForm.Designer.cs">
+        <Compile Include="Views\MainForm.Initializer.cs">
           <DependentUpon>MainForm.cs</DependentUpon>
         </Compile>
         <Compile Include="Views\MenuControl.cs">
