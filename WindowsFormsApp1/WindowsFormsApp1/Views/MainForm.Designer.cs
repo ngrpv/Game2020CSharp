@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1.Views
 {
@@ -53,9 +54,11 @@ namespace WindowsFormsApp1.Views
             // 
             // MainForm
             // 
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 461);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.optionsControl1);
             this.Controls.Add(this.menuControl1);
             this.Name = "MainForm";

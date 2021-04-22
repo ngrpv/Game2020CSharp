@@ -37,6 +37,9 @@ namespace WindowsFormsApp1.Views
         }
 
 
-       
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

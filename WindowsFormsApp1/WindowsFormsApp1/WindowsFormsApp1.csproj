@@ -75,6 +75,12 @@
         <Compile Include="Views\OptionsControl.Designer.cs">
           <DependentUpon>OptionsControl.cs</DependentUpon>
         </Compile>
+        <Compile Include="Views\PlayingControl.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="Views\PlayingControl.Designer.cs">
+          <DependentUpon>PlayingControl.cs</DependentUpon>
+        </Compile>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -93,6 +99,9 @@
         <EmbeddedResource Include="Views\OptionsControl.resx">
           <DependentUpon>OptionsControl.cs</DependentUpon>
         </EmbeddedResource>
+        <EmbeddedResource Include="Views\PlayingControl.resx">
+          <DependentUpon>PlayingControl.cs</DependentUpon>
+        </EmbeddedResource>
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
             <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,6 +114,11 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Views\cargo.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

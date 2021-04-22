@@ -7,6 +7,7 @@ namespace WindowsFormsApp1.Views
     public partial class MainForm : Form
     {
         private Game game;
+
         //private MenuControl menuControl;
         //private OptionsControl optionsControl;
         public MainForm()
@@ -14,9 +15,9 @@ namespace WindowsFormsApp1.Views
             InitializeComponent();
             game = new Game();
             game.StageChanged += Game_OnStageChanged;
-            game.ChangeStage(default);
+            game.ChangeStage(GameStage.NotStarted);
         }
-        
+
 
         private void Game_OnStageChanged(GameStage stage)
         {
@@ -36,22 +37,22 @@ namespace WindowsFormsApp1.Views
                     break;
             }
         }
-        
+
         private void ShowStartScreen()
         {
-           HideScreens();
-           menuControl1.Configure(game);
-           menuControl1.Show();
+            HideScreens();
+            menuControl1.Configure(game);
+            menuControl1.Show();
         }
-        
-        public void ShowOptionsScreen()
+
+        private void ShowOptionsScreen()
         {
             HideScreens();
             optionsControl1.Configure(game);
             optionsControl1.Show();
         }
 
-        private void  HideScreens()
+        private void HideScreens()
         {
             menuControl1.Hide();
             optionsControl1.Hide();
@@ -61,7 +62,5 @@ namespace WindowsFormsApp1.Views
         private void menuControl1_Load(object sender, EventArgs e)
         {
         }
-
-
     }
 }
