@@ -7,16 +7,15 @@ namespace WindowsFormsApp1.Views
     public partial class MainForm : Form
     {
         private Game game;
-        //private MenuControl menuControl;
-        //private OptionsControl optionsControl;
+
         public MainForm()
         {
             InitializeComponent();
             game = new Game();
             game.StageChanged += Game_OnStageChanged;
-            game.ChangeStage(default);
+            game.ChangeStage(GameStage.NotStarted);
         }
-        
+
 
         private void Game_OnStageChanged(GameStage stage)
         {
@@ -31,29 +30,40 @@ namespace WindowsFormsApp1.Views
                 case GameStage.NotStarted:
                     ShowStartScreen();
                     break;
+                case GameStage.Selection:
+                    break;
+                case GameStage.Playing:
+                    break;
                 default:
                     ShowStartScreen();
                     break;
             }
         }
-        
+
         private void ShowStartScreen()
         {
-           HideScreens();
-           menuControl1.Configure(game);
-           menuControl1.Show();
+            HideScreens();
+            menuControl.Configure(game);
+            menuControl.Show();
         }
-        
-        public void ShowOptionsScreen()
+
+        private void ShowOptionsScreen()
         {
             HideScreens();
             optionsControl1.Configure(game);
             optionsControl1.Show();
         }
-
-        private void  HideScreens()
+        
+        /*private void ShowPlayingScreen()
         {
-            menuControl1.Hide();
+            HideScreens();
+            playingControl.Configure(game);
+            optionsControl1.Show();
+        }*/
+
+        private void HideScreens()
+        {
+            menuControl.Hide();
             optionsControl1.Hide();
         }
 
@@ -61,7 +71,5 @@ namespace WindowsFormsApp1.Views
         private void menuControl1_Load(object sender, EventArgs e)
         {
         }
-
-
     }
 }
