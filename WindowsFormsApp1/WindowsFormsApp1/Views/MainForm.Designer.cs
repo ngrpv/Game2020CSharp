@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1.Views
@@ -9,7 +12,9 @@ namespace WindowsFormsApp1.Views
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
-
+        
+        private WindowsFormsApp1.Views.OptionsControl optionsControl1;
+        private WindowsFormsApp1.Views.MenuControl menuControl1;
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -24,7 +29,37 @@ namespace WindowsFormsApp1.Views
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        private void InitializeComponent()
+        {
+            menuControl1 = new MenuControl()
+            {
+                Dock = DockStyle.Fill,
+                Name = "MenuControl"
+            };
+
+            optionsControl1 = new OptionsControl()
+            {
+                Dock = DockStyle.Fill,
+                Name = "OPtions",
+                Visible = false
+            };
+            
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+            var table = new TableLayoutPanel();
+            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            table.Dock = DockStyle.Fill;
+            table.Controls.Add(menuControl1,0,0);
+            table.Controls.Add(new Button(),1,0);
+            this.Controls.Add(table);
+            
+        }
+
+        
+
+        /*#region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -32,25 +67,29 @@ namespace WindowsFormsApp1.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuControl1 = new WindowsFormsApp1.Views.MenuControl();
+
+            
+
+            this.menuControl1 = new MenuControl()
+            {
+                Name = "menuControl1",
+                Dock = DockStyle.Top
+            };
             this.optionsControl1 = new WindowsFormsApp1.Views.OptionsControl();
             this.SuspendLayout();
+            var size = new Size(500, 300);
             // 
             // menuControl1
             // 
-            this.menuControl1.Location = new System.Drawing.Point(152, 94);
-            this.menuControl1.Name = "menuControl1";
-            this.menuControl1.Size = new System.Drawing.Size(441, 219);
-            this.menuControl1.TabIndex = 0;
-            this.menuControl1.Load += new System.EventHandler(this.menuControl1_Load);
+           // CreateControl(menuControl1, "menuControl1", new Point(400,94), size);
+          //  this.menuControl1.TabIndex = 0;
+         //   this.menuControl1.Load += new System.EventHandler(this.menuControl1_Load);
             // 
             // optionsControl1
             // 
-            this.optionsControl1.Location = new System.Drawing.Point(110, 55);
-            this.optionsControl1.Name = "optionsControl1";
-            this.optionsControl1.Size = new System.Drawing.Size(557, 346);
+            /*CreateControl(optionsControl1, "optionsControl1", new Point(500,55), size);
             this.optionsControl1.TabIndex = 1;
-            this.optionsControl1.Visible = false;
+            this.optionsControl1.Visible = false;#1#
             // 
             // MainForm
             // 
@@ -59,17 +98,37 @@ namespace WindowsFormsApp1.Views
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.optionsControl1);
-            this.Controls.Add(this.menuControl1);
+          //  this.Controls.Add(this.optionsControl1);
+            //this.Controls.Add(this.menuControl1);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
+
+            var table = new TableLayoutPanel();
+            table.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
+            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+            table.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
+            //table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            //table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            table.Dock = DockStyle.Fill;
+            table.Controls.Add(new Panel(), 0,0);
+            table.Controls.Add(menuControl1, 0,1);
+            table.Controls.Add(new Panel(), 0,3);
+            Controls.Add(table);
+        }
+
+        private void CreateControl(Control control, string name, Point location, Size size)
+        {
+            control.Location = location;
+            control.Name = name;
+            control.Size = size;
         }
 
         private WindowsFormsApp1.Views.OptionsControl optionsControl1;
 
         private WindowsFormsApp1.Views.MenuControl menuControl1;
 
-        #endregion
+        #endregion*/
     }
 }
