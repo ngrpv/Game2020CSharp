@@ -6,6 +6,7 @@ namespace WindowsFormsApp1.Views
 {
     public partial class MainForm : Form
     {
+        
         private Game game;
 
         public MainForm()
@@ -33,6 +34,7 @@ namespace WindowsFormsApp1.Views
                 case GameStage.Selection:
                     break;
                 case GameStage.Playing:
+                    ShowPlayingScreen();
                     break;
                 default:
                     ShowStartScreen();
@@ -54,12 +56,12 @@ namespace WindowsFormsApp1.Views
             optionsControl1.Show();
         }
         
-        /*private void ShowPlayingScreen()
+        private void ShowPlayingScreen()
         {
             HideScreens();
             playingControl.Configure(game);
-            optionsControl1.Show();
-        }*/
+            playingControl.Show();
+        }
 
         private void HideScreens()
         {

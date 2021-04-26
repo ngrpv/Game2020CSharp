@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using WindowsFormsApp1.Properties;
 
 namespace WindowsFormsApp1.Views
 {
@@ -33,44 +34,52 @@ namespace WindowsFormsApp1.Views
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlayingControl));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Car = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.Car)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, -12);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(1920, 1080);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(749, 595);
+            this.pictureBox1.Size = new System.Drawing.Size(1920, 1080);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_4);
             // 
-            // Car
+            // pictureBox2
             // 
-            this.Car.Location = new System.Drawing.Point(322, 180);
-            this.Car.Name = "Car";
-            this.Car.Size = new System.Drawing.Size(95, 131);
-            this.Car.TabIndex = 1;
-            this.Car.TabStop = false;
-            this.Car.Click += new System.EventHandler(this.Car_Click);
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox2.Image = ((System.Drawing.Image) (resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(590, 462);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(740, 100);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
             // 
             // PlayingControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Car);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PlayingControl";
-            this.Size = new System.Drawing.Size(737, 586);
+            this.Size = new System.Drawing.Size(1920, 1080);
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.Car)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
-        private System.Windows.Forms.PictureBox Car;
+        private System.Windows.Forms.PictureBox pictureBox2;
 
         private System.Windows.Forms.PictureBox pictureBox1;
 
