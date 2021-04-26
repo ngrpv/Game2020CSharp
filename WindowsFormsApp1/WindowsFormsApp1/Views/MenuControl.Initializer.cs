@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using WindowsFormsApp1.Properties;
 
 namespace WindowsFormsApp1.Views
 {
@@ -20,41 +21,34 @@ namespace WindowsFormsApp1.Views
         }*/
         private void InitializeComponent()
         {
-            var buttons = new[]
+            var buttons = new PictureBox[]
             {
-                startButton = new Button() {Text = @"Start Game", Dock = DockStyle.Fill},
-                optionsButton = new Button() {Text = @"Options", Dock = DockStyle.Fill,},
-                exitButton = new Button() {Text = @"Exit", Dock = DockStyle.Fill}
+                startButton = new PictureBox() {Image = Resources.start,SizeMode = PictureBoxSizeMode.AutoSize, Location = new Point(590,462), BackColor = Color.Transparent},
+                optionsButton = new PictureBox() {Image = Resources.options1,Location = new Point(590,662), SizeMode = PictureBoxSizeMode.AutoSize,BackColor = Color.Transparent},
+                exitButton = new PictureBox() {Image = Resources.exit, SizeMode = PictureBoxSizeMode.AutoSize, Location = new Point(590, 862),BackColor = Color.Transparent}
             };
             
             // SuspendLayout();
             optionsButton.Click += optionsButton_Click;
-            optionsButton.UseVisualStyleBackColor = false;
+           // optionsButton.UseVisualStyleBackColor = false;
             exitButton.Click += exitButton_Click;
+            startButton.Click += startButton_Click;
 
             Name = "MenuControl";
+            BackgroundImage = Resources.bg;
             ResumeLayout(false);
 
-            var innerTable = new TableLayoutPanel
-            {
-                Anchor = AnchorStyles.None,
-                Size = new Size(300, 200)
-            };
-            innerTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            for (var i = 0; i < buttons.Length; i++)
-            {
-                innerTable.RowStyles.Add(new RowStyle(SizeType.Percent, 30));
-                innerTable.Controls.Add(buttons[i], 0, i);
-            }
-            
-            var outerTable = new TableLayoutPanel();
-            outerTable.Controls.Add(innerTable);
-            outerTable.Dock = DockStyle.Fill;
-            Controls.Add(outerTable);
+            BackgroundImage = Resources.bg;
+            Dock = DockStyle.Fill;
+            Controls.Add(startButton);
+            Controls.Add(optionsButton);
+            Controls.Add(exitButton);
+
+
         }
 
-        private Button optionsButton;
-        private Button exitButton;
-        private Button startButton;
+        private PictureBox optionsButton;
+        private PictureBox exitButton;
+        private PictureBox startButton;
     }
 }

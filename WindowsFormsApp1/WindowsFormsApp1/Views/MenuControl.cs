@@ -22,7 +22,7 @@ namespace WindowsFormsApp1.Views
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            
+            game.ChangeStage(GameStage.Playing);
         }
         
         private void optionsButton_Click(object sender, EventArgs e)
