@@ -23,50 +23,37 @@ namespace WindowsFormsApp1.Views
             switch (stage)
             {
                 case GameStage.Options:
-                    ShowOptionsScreen();
+                    ShowScreen(optionsControl1);
                     break;
                 case GameStage.Finished:
                     //ShowFinishedScreen();
                     break;
                 case GameStage.NotStarted:
-                    ShowStartScreen();
+                    ShowScreen(menuControl);
                     break;
                 case GameStage.Selection:
                     break;
                 case GameStage.Playing:
-                    ShowPlayingScreen();
+                    ShowScreen(playingControl);
                     break;
                 default:
-                    ShowStartScreen();
+                    ShowScreen(menuControl);
                     break;
             }
         }
 
-        private void ShowStartScreen()
+        private void ShowScreen(IControl control)
         {
             HideScreens();
-            menuControl.Configure(game);
-            menuControl.Show();
-        }
-
-        private void ShowOptionsScreen()
-        {
-            HideScreens();
-            optionsControl1.Configure(game);
-            optionsControl1.Show();
-        }
-        
-        private void ShowPlayingScreen()
-        {
-            HideScreens();
-            playingControl.Configure(game);
-            playingControl.Show();
+            control.Configure(game);
+            control.Show();
         }
 
         private void HideScreens()
         {
             menuControl.Hide();
             optionsControl1.Hide();
+            playingControl.Hide();
         }
 
 

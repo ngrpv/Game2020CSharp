@@ -4,7 +4,7 @@ using WindowsFormsApp1.Domain;
 
 namespace WindowsFormsApp1.Views
 {
-    public partial class OptionsControl : UserControl
+    public partial class OptionsControl :  UserControl, IControl
     {
         private Game game;
         public OptionsControl()

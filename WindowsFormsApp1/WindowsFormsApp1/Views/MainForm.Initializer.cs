@@ -28,9 +28,8 @@ namespace WindowsFormsApp1.Views
 
         private void InitializeComponent()
         {
-            //StartPosition = FormStartPosition.WindowsDefaultLocation;
             FormBorderStyle = FormBorderStyle.None;
-            
+            AutoScaleMode = AutoScaleMode.None;
             WindowState = FormWindowState.Maximized;
             menuControl = new MenuControl(){ Dock = DockStyle.Fill };
             optionsControl1 = new OptionsControl(){Dock = DockStyle.Fill,Visible = false};

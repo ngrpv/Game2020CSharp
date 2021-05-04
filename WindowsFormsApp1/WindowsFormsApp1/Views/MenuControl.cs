@@ -4,7 +4,7 @@ using WindowsFormsApp1.Domain;
 
 namespace WindowsFormsApp1.Views
 {
-    public partial class MenuControl : UserControl
+    public partial class MenuControl : UserControl, IControl
     {
         private Game game;
         public MenuControl()
@@ -22,7 +22,7 @@ namespace WindowsFormsApp1.Views
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            game.ChangeStage(GameStage.Playing);
+            game.ChangeStage(GameStage.Selection);
         }
         
         private void optionsButton_Click(object sender, EventArgs e)

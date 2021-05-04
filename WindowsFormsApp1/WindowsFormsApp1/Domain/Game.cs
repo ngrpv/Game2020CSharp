@@ -20,7 +20,10 @@ namespace WindowsFormsApp1.Domain
             this.stage = stage;
             StageChanged?.Invoke(stage);
         }
-        
+    }
 
+    public class RoadPattern
+    {
+        
     }
 }
