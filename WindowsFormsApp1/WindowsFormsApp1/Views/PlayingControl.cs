@@ -25,11 +25,5 @@ namespace WindowsFormsApp1.Views
         {
             throw new System.NotImplementedException();
         }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-           // Thread.Sleep(5000);
-            base.OnPaint(e);
-        }
     }
 }

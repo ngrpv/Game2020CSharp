@@ -15,28 +15,30 @@ namespace WindowsFormsApp1.Views
                     Image = Resources.start,
                     SizeMode = PictureBoxSizeMode.AutoSize,
                     Location = new Point(590, 462),
-                    BackColor = Color.Transparent
+                    BackColor = Color.Transparent,
                 },
                 optionsButton = new PictureBox()
                 {
                     Image = Resources.options,
                     Location = new Point(590, 662),
                     SizeMode = PictureBoxSizeMode.AutoSize,
-                    BackColor = Color.Transparent
+                    BackColor = Color.Transparent,
                 },
                 exitButton = new PictureBox()
                 {
                     Image = Resources.exit, 
                     SizeMode = PictureBoxSizeMode.AutoSize, 
                     Location = new Point(590, 862),
-                    BackColor = Color.Transparent
+                    BackColor = Color.Transparent,
                 }
             };
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             optionsButton.Click += optionsButton_Click;
             exitButton.Click += exitButton_Click;
             startButton.Click += startButton_Click;
             Name = "MenuControl";
             BackgroundImage = Resources.bg;
+            BackgroundImageLayout = ImageLayout.Zoom;
             ResumeLayout(false);
             Dock = DockStyle.Fill;
             foreach (var control in buttons)

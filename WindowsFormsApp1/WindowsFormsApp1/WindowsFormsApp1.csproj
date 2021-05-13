@@ -74,7 +74,7 @@
     <Compile Include="Views\OptionsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\OptionsControl.Designer.cs">
+    <Compile Include="Views\OptionsControl.Initializer.cs">
       <DependentUpon>OptionsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PlayingControl.cs">
@@ -134,6 +134,7 @@
     <Content Include="Resources\Car1.png" />
     <Content Include="Resources\exit.png" />
     <Content Include="Resources\menu.png" />
+    <Content Include="Resources\menu1.png" />
     <Content Include="Resources\Mini_truck1.png" />
     <Content Include="Resources\Mini_van1.png" />
     <Content Include="Resources\options.png" />
@@ -146,6 +147,26 @@
     <Content Include="Views\cargo.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MediaPlayer">
+      <Guid>{22D6F304-B0F6-11D0-94AB-0080C74C7E95}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

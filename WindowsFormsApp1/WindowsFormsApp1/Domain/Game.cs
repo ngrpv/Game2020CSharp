@@ -6,14 +6,15 @@ namespace WindowsFormsApp1.Domain
     {
         private GameStage stage = GameStage.NotStarted;
         private Player _player;
-        private GameOptions options = new GameOptions();
+
+        public GameOptions options = new GameOptions();
 
         public event Action<GameStage> StageChanged;
 
-        public void SetVolume(int volume)
+        /*public void SetVolume(int volume)
         {
             options.Volume = volume;
-        }
+        }*/
         
         public void ChangeStage(GameStage stage)
         {

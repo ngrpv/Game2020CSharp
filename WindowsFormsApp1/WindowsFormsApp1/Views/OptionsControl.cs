@@ -22,15 +22,11 @@ namespace WindowsFormsApp1.Views
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            game.SetVolume(this.trackBar1.Value);
+          //  game.options.Volume = this.trackBar1.Value%2 == 0?0:1;
+            trackBarValue.Text = trackBar1.Value.ToString();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             game.ChangeStage(GameStage.NotStarted);
         }
