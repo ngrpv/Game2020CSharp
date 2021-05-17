@@ -26,7 +26,7 @@ namespace WindowsFormsApp1.Views
 
             this.game = game;
             carPicture = Vizualizator.Initialize(game.Car);
-            roadObj = new RoadPattern();
+            var roadObj = new RoadPattern();
             road = Vizualizator.Initialize(roadObj);
             Controls.Add(carPicture);
             Controls.Add(road);
