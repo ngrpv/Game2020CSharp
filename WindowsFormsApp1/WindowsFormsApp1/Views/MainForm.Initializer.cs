@@ -4,16 +4,16 @@ using System.Windows.Forms.VisualStyles;
 
 namespace WindowsFormsApp1.Views
 {
-    partial class MainForm
+    sealed partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
         
-        private OptionsControl optionsControl1;
-        private MenuControl menuControl;
-        private PlayingControl playingControl;
+        public OptionsControl optionsControl1;
+        public MenuControl menuControl;
+        public PlayingControl playingControl;
         
         /// <summary>
         /// Clean up any resources being used.

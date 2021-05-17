@@ -22,7 +22,7 @@ namespace WindowsFormsApp1.Views
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-          //  game.options.Volume = this.trackBar1.Value%2 == 0?0:1;
+           // game.options.Volume = this.trackBar1.Value%2 == 0?0:1;
             trackBarValue.Text = trackBar1.Value.ToString();
         }
 

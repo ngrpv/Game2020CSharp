@@ -3,29 +3,42 @@ using System.Drawing;
 
 namespace WindowsFormsApp1.Domain
 {
-    public class Car
+    public class Car : IVizualizeable
     {
-        private Point _location;
-        public double Speed { get;}
+        public Point _location;
+        public double Speed { get; } = 15; 
+        public readonly CarModel CarModel; 
 
-        public Point Location => _location;
+        public Point Location
+        {
+            get => _location;
+            set => _location = value;
+        }
 
-        public Car(Point location, double speed)
+        public Car(Point location, CarModel model)
         {
             _location = location;
-            Speed = speed;
+           // Speed = speed;
+            CarModel = model;
         }
 
-        public void MoveTo(int x, int y)
+        /*public void MoveTo(int x, int y)
         {
-            _location.X = x;
-            _location.Y = y;
-        }
+            Location= 
+        }*/
         
-        public void Move(int x, int y)
+        public void Move(int dx, int dy)
         {
-            _location.X += x;
-            _location.Y += y;
+            Location = new Point(Location.X + (int)(Speed*dx), Location.Y + (int)(Speed * dy));
         }
+    }
+
+    
+    public enum CarModel
+    {
+        Truck,
+        RaceCar,
+        Police,
+        Taxi,
     }
 }

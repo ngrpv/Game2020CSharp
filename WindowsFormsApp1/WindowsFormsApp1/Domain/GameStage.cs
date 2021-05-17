@@ -6,6 +6,7 @@
         Options,
         Selection,
         Playing,
-        Finished
+        Finished,
+        Updated
     }
 }

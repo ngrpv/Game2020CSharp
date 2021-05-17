@@ -4,13 +4,14 @@ using WindowsFormsApp1.Domain;
 
 namespace WindowsFormsApp1.Views
 {
-    public partial class MainForm : Form
+    public  partial class MainForm : Form
     {
         
-        private Game game;
+        public Game game;
 
         public MainForm()
         {
+            DoubleBuffered = true;
             InitializeComponent();
             game = new Game();
             game.StageChanged += Game_OnStageChanged;
@@ -34,7 +35,10 @@ namespace WindowsFormsApp1.Views
                 case GameStage.Selection:
                     break;
                 case GameStage.Playing:
+                   // game.Start();
                     ShowScreen(playingControl);
+                    break;
+                case GameStage.Updated:
                     break;
                 default:
                     ShowScreen(menuControl);
@@ -47,6 +51,7 @@ namespace WindowsFormsApp1.Views
             HideScreens();
             control.Configure(game);
             control.Show();
+            ActiveControl = control as UserControl;
         }
 
         private void HideScreens()
@@ -54,8 +59,9 @@ namespace WindowsFormsApp1.Views
             menuControl.Hide();
             optionsControl1.Hide();
             playingControl.Hide();
+            
         }
-
+        
 
         private void menuControl1_Load(object sender, EventArgs e)
         {
