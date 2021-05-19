@@ -32,7 +32,7 @@ namespace WindowsFormsApp1.Domain
 
         public void	 Start()
         {
-            Start(new Car(new Point(500,500), CarModel.Police));        
+            Start(new Car(new Point(960,800), CarModel.RaceCar));        
         }
 
         public void MoveCar(char keyChar)
@@ -40,16 +40,16 @@ namespace WindowsFormsApp1.Domain
             switch (keyChar)
             {
                 case 'w':
-                    Car.Move(0, -1);
+                    Car.Move(0, -1*Car.Speed);
                     break;
                 case 'a':
-                    Car.Move(-1, 0);
+                    Car.Move(-1*Car.Speed, 0);
                     break;
                 case 's':
-                    Car.Move(0, 1);
+                    Car.Move(0, 1*Car.Speed);
                     break;
                 case 'd':
-                    Car.Move(1, 0);
+                    Car.Move(1*Car.Speed, 0);
                     break;
             }
         }

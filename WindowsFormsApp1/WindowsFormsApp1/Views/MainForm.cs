@@ -26,6 +26,7 @@ namespace WindowsFormsApp1.Views
             {
                 case GameStage.Options:
                     ShowScreen(optionsControl1);
+                    game.Options.Volume /= 10;
                     break;
                 case GameStage.Finished:
                     //ShowFinishedScreen();

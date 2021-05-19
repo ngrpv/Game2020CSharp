@@ -54,11 +54,12 @@
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameOptions.cs" />
     <Compile Include="Domain\GameStage.cs" />
+    <Compile Include="Domain\VisualizeableObject.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\Race.cs" />
     <Compile Include="Domain\RoadPattern.cs" />
     <Compile Include="Domain\Terrain.cs" />
-    <Compile Include="Domain\Vizualizator.cs" />
+    <Compile Include="Domain\Visualizator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IControl.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Views\MenuControl.Initializer.cs">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ObjectWithPicture.cs" />
     <Compile Include="Views\OptionsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

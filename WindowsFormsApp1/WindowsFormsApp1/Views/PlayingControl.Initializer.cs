@@ -28,6 +28,8 @@ namespace WindowsFormsApp1.Views
             }
 
             base.Dispose(disposing);
+           
+            
         }
         
         private void InitializeComponent()
@@ -35,7 +37,6 @@ namespace WindowsFormsApp1.Views
             Dock = DockStyle.Fill;
         }
 
-        private PictureBox carPicture;
-        private PictureBox road;
+       // private PictureBox carPicture;
     }
 }

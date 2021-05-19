@@ -8,12 +8,7 @@ using WindowsFormsApp1.Views;
 
 namespace WindowsFormsApp1.Domain
 {
-    public interface IVizualizeable
-    {
-        public Point Location { get; set; }
-    }
-    
-    public static  class Vizualizator
+    public static  class Visualizator
     {
         private static Dictionary<CarModel, Bitmap> carPictures = new Dictionary<CarModel, Bitmap>()
         {
@@ -23,7 +18,7 @@ namespace WindowsFormsApp1.Domain
             [CarModel.Truck] = Resources.truck,
         };
         
-        public static PictureBox Initialize(IVizualizeable obj)
+        public static PictureBox Initialize(VisualizeableObject obj)
         {
             if (obj.GetType() != typeof(Car) && obj.GetType() != typeof(RoadPattern)) throw new ArgumentException();
             if (obj.GetType() == typeof(Car))
@@ -31,10 +26,18 @@ namespace WindowsFormsApp1.Domain
                 var car = obj as Car;
                 var picture = new PictureBox();
                 if (carPictures.ContainsKey(((Car) obj).CarModel))
-                    picture.Image = carPictures[((Car) obj).CarModel];
+                {
+                    var temp = carPictures[((Car) obj).CarModel];
+                    temp.MakeTransparent();
+                    picture.Image = temp;
+                }
+                
                 picture.Location = car.Location;
+              //  picture.Dock = DockStyle.Fill;
+                 picture.BackgroundImageLayout = ImageLayout.None;
                 picture.BackColor = Color.Transparent;
                 picture.SizeMode = PictureBoxSizeMode.AutoSize;
+                //picture.Size = new Size(50, 50);
                 return picture;
             }
             if(obj.GetType() == typeof(RoadPattern))
@@ -51,9 +54,9 @@ namespace WindowsFormsApp1.Domain
             return null;
         }
 
-        public static void UpdateLocation(PictureBox pictureBox, IVizualizeable obj)
+        public static void UpdateLocation(ObjectWithPicture objectWithPicture)
         {
-            pictureBox.Location = obj.Location;
+            objectWithPicture.Picture.Location = objectWithPicture.Obj.Location;
         }
 
     }

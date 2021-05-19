@@ -25,38 +25,43 @@ namespace WindowsFormsApp1.Views
                 return;
 
             this.game = game;
-            carPicture = Vizualizator.Initialize(game.Car);
-            var roadObj = new RoadPattern();
-            road = Vizualizator.Initialize(roadObj);
-            Controls.Add(carPicture);
-            Controls.Add(road);
-            
-            KeyPress += (sender, args) =>
-            { 
-                game.MoveCar(args.KeyChar);
-            };
-            Task.Factory.StartNew(() =>
+            var road = GetObjectWithPicture(new RoadPattern(new Point(0,0)));
+            Controls.Add(road.Picture);
+            var car = GetObjectWithPicture(game.Car);
+            Controls.Add(car.Picture);
+            Controls.SetChildIndex(car.Picture,0);
+            KeyPress += (_, args) => game.MoveCar(args.KeyChar);
+            Task.Factory.StartNew( () =>
             {
                 while (true)
                 {
                     Thread.Sleep(1);
-                    Vizualizator.UpdateLocation(carPicture, game.Car);
-                    BeginInvoke(new Action(() => Invalidate()));
+                    Visualizator.UpdateLocation(car);
+                    BeginInvoke(new Action(Invalidate));
                 }
             });
+            MoveRoadInThread(new[]{road}, game.Car.Speed);
+        }
+
+        private static ObjectWithPicture GetObjectWithPicture(VisualizeableObject obj)
+            => new ObjectWithPicture(obj, Visualizator.Initialize(obj));
+
+        private void MoveRoadInThread(ObjectWithPicture[] objectWithPictures, int speed)
+        {
             Task.Factory.StartNew(() =>
             {
                 while (true)
                 {
                     Thread.Sleep(1);
-                    Vizualizator.UpdateLocation(road, roadObj);
-                    BeginInvoke(new Action(() => Invalidate()));
+                    foreach (var objectWithPicture in objectWithPictures)
+                    {
+                        objectWithPicture.Obj.Move(0,speed);
+                        Visualizator.UpdateLocation(objectWithPicture);
+                    }
+                    BeginInvoke(new Action(Invalidate));
                 }
             });
         }
-        
-
-
 
         private void pictureBox1_Click_4(object sender, EventArgs e)
         {

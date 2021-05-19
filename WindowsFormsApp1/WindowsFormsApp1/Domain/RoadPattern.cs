@@ -2,9 +2,8 @@
 
 namespace WindowsFormsApp1.Domain
 {
-    public class RoadPattern : IVizualizeable
+    public class RoadPattern : VisualizeableObject
     {
-        public Point Location { get; set; }
-        
+        public RoadPattern(Point location) : base(location) { }
     }
 }

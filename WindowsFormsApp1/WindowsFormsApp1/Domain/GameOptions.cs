@@ -1,5 +1,4 @@
-﻿using System.Media;
-
+﻿using MediaPlayer;
 namespace WindowsFormsApp1.Domain
 {
     public class GameOptions
@@ -7,13 +6,11 @@ namespace WindowsFormsApp1.Domain
         public int Volume
         {
             get => s.Volume;
-            set
-            {
-                s.Volume = value;
-            }
+            set => s.Volume = value;
         }
 
-        private MediaPlayer.MediaPlayer s = new MediaPlayer.MediaPlayer()
+        
+        public MediaPlayer.MediaPlayer s = new ()
         {
             FileName = @"C:\Users\Garipov\Desktop\C#Game\Assets\VEHCar.wav",
         };
@@ -21,8 +18,12 @@ namespace WindowsFormsApp1.Domain
 
         public GameOptions()
         {
+            //Volume = 1;
             //_soundPlayer.Play();
-            s.Play();
+            //s.Play();
+            
+            //Thread.Sleep(5000);
+            //  s.Volume /= 2;
         }
         
         public void Open()
