@@ -54,6 +54,7 @@
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameOptions.cs" />
     <Compile Include="Domain\GameStage.cs" />
+    <Compile Include="Domain\Roads.cs" />
     <Compile Include="Domain\VisualizeableObject.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\Race.cs" />

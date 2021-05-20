@@ -54,7 +54,7 @@ namespace WindowsFormsApp1.Domain
             return null;
         }
 
-        public static void UpdateLocation(ObjectWithPicture objectWithPicture)
+        public static void UpdateLocation(this ObjectWithPicture objectWithPicture)
         {
             objectWithPicture.Picture.Location = objectWithPicture.Obj.Location;
         }

@@ -25,9 +25,10 @@ namespace WindowsFormsApp1.Views
                 return;
 
             this.game = game;
-            var road = GetObjectWithPicture(new RoadPattern(new Point(0,0)));
-            Controls.Add(road.Picture);
-            var car = GetObjectWithPicture(game.Car);
+            var roads = new Roads();
+            foreach (var road in roads.RoadsArray)
+                Controls.Add(road.Picture);
+            var car = new ObjectWithPicture(game.Car);
             Controls.Add(car.Picture);
             Controls.SetChildIndex(car.Picture,0);
             KeyPress += (_, args) => game.MoveCar(args.KeyChar);
@@ -35,37 +36,26 @@ namespace WindowsFormsApp1.Views
             {
                 while (true)
                 {
-                    Thread.Sleep(1);
-                    Visualizator.UpdateLocation(car);
+                    Thread.Sleep(5);
+                    car.UpdateLocation();
                     BeginInvoke(new Action(Invalidate));
                 }
             });
-            MoveRoadInThread(new[]{road}, game.Car.Speed);
+            MoveRoadInThread(roads, game.Car.Speed);
         }
 
-        private static ObjectWithPicture GetObjectWithPicture(VisualizeableObject obj)
-            => new ObjectWithPicture(obj, Visualizator.Initialize(obj));
 
-        private void MoveRoadInThread(ObjectWithPicture[] objectWithPictures, int speed)
+        private void MoveRoadInThread(Roads roads, int speed)
         {
             Task.Factory.StartNew(() =>
             {
                 while (true)
                 {
-                    Thread.Sleep(1);
-                    foreach (var objectWithPicture in objectWithPictures)
-                    {
-                        objectWithPicture.Obj.Move(0,speed);
-                        Visualizator.UpdateLocation(objectWithPicture);
-                    }
+                    Thread.Sleep(20);
+                    roads.ShiftDown(speed);
                     BeginInvoke(new Action(Invalidate));
                 }
             });
-        }
-
-        private void pictureBox1_Click_4(object sender, EventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
