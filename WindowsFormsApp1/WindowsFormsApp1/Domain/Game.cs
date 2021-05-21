@@ -28,6 +28,7 @@ namespace WindowsFormsApp1.Domain
         {
             Car = car;
             ChangeStage(GameStage.Playing);
+            Options.s.Play();
         }
 
         public void	 Start()

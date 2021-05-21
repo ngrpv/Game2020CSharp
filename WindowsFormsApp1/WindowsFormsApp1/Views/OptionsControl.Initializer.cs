@@ -22,7 +22,8 @@ namespace WindowsFormsApp1.Views
                 Location = new Point(250, 90), Size = new Size(100, 20),
                 Font = new Font(FontFamily.GenericSansSerif, 22), 
                 ForeColor = Color.Azure, 
-                BackColor = Color.Black
+                BackColor = Color.Black,
+                MaxLength = 100,
             };
             panel1 = new Panel
             {
@@ -30,6 +31,7 @@ namespace WindowsFormsApp1.Views
                 Controls = {pictureBox2, trackBarValue, trackBar1},
                 Anchor = AnchorStyles.None,
                 Size = new Size(500, 155),
+                
             };
             panel1.Location = new Point(ClientSize.Width / 2 - panel1.Size.Width / 2,
                 ClientSize.Height / 2 - panel1.Size.Height / 2);
@@ -41,6 +43,8 @@ namespace WindowsFormsApp1.Views
                 Size = new Size(740, 100),
                 SizeMode = PictureBoxSizeMode.AutoSize
             };
+            trackBar1.Maximum = 100;
+            trackBar1.TickFrequency = 1;
             trackBar1.Scroll += trackBar1_Scroll;
             backToMenuButton.Click += pictureBox1_Click;
 
