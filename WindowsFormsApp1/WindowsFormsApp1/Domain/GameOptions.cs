@@ -1,6 +1,5 @@
-﻿
-using System;
-using System.Windows.Media;
+﻿using System;
+
 namespace WindowsFormsApp1.Domain
 {
     public class GameOptions

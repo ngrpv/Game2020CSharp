@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 using WindowsFormsApp1.Domain;
 
@@ -54,10 +53,7 @@ namespace WindowsFormsApp1.Views
                     break;
             }
         }
-
-        private void StartGame()
-        {
-        }
+        
         private void ShowScreen(IControl control)
         {
             HideScreens();
@@ -73,9 +69,5 @@ namespace WindowsFormsApp1.Views
             playingControl.Hide();
         }
         
-
-        private void menuControl1_Load(object sender, EventArgs e)
-        {
-        }
     }
 }

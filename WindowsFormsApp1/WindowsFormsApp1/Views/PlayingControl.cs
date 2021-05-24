@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.TextFormatting;
 using WindowsFormsApp1.Domain;
-using WindowsFormsApp1.Properties;
+
 
 namespace WindowsFormsApp1.Views
 {

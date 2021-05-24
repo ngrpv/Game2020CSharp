@@ -59,7 +59,6 @@
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\Race.cs" />
     <Compile Include="Domain\RoadPattern.cs" />
-    <Compile Include="Domain\Terrain.cs" />
     <Compile Include="Domain\Visualizator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
