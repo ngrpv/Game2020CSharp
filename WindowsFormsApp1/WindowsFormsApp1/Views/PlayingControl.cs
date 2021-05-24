@@ -119,7 +119,7 @@ namespace WindowsFormsApp1.Views
                 while (game.Stage == GameStage.Playing)
                 {
                     Thread.Sleep(ms);
-                    lock (lockObject)
+                 //   lock (lockObject)
                     {
                         BeginInvoke(new Action(Invalidate));
                     }
