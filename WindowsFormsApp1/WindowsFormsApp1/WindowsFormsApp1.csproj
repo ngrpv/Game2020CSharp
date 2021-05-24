@@ -143,6 +143,7 @@
     <Content Include="Resources\Mini_truck1.png" />
     <Content Include="Resources\Mini_van1.png" />
     <Content Include="Resources\options.png" />
+    <Content Include="Resources\options_bg.jpg" />
     <Content Include="Resources\Police1.png" />
     <Content Include="Resources\preview_carspritespack1.jpg" />
     <Content Include="Resources\road.jpg" />

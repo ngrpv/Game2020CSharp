@@ -11,16 +11,18 @@ namespace WindowsFormsApp1.Views
         {
             trackBar1 = new TrackBar
             {
-                Location = new Point(95, 25),
-                Size = new Size(258, 45),
+                Location = new Point(685, 590),
+                Size = new Size(550, 500),
                 Maximum = 100,
+                BackColor = Color.White,
             };
             trackBar1.Value = 50;
             pictureBox2 = new PictureBox
             {
                 Image = Resources.options,
-                Location = new Point(12, 19),
+               // Location = new Point(12, 19),
                 Size = new Size(77, 51),
+                Anchor = AnchorStyles.Top,
                 SizeMode = PictureBoxSizeMode.Zoom
             };
             trackBarValue = new TextBox
@@ -34,7 +36,7 @@ namespace WindowsFormsApp1.Views
             panel1 = new Panel
             {
                 BackColor = Color.Transparent,
-                Controls = {pictureBox2, trackBarValue, trackBar1},
+                Controls = { trackBar1},
                 Anchor = AnchorStyles.None,
                 Size = new Size(500, 155)
             };
@@ -51,9 +53,10 @@ namespace WindowsFormsApp1.Views
             trackBar1.Scroll += trackBar1_Scroll;
             backToMenuButton.Click += pictureBox1_Click;
 
-            BackgroundImage = Resources.bg;
+            BackgroundImage = Resources.options_bg;
             Controls.Add(backToMenuButton);
-            Controls.Add(panel1);
+            //Controls.Add(panel1);
+            Controls.Add(trackBar1);
             /*((ISupportInitialize) (trackBar1)).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.Domain;
+using WindowsFormsApp1.Properties;
+using Timer = System.Windows.Forms.Timer;
 
 
 namespace WindowsFormsApp1.Views
@@ -10,7 +14,6 @@ namespace WindowsFormsApp1.Views
     public partial class PlayingControl : UserControl, IControl
     {
         private Game game;
-        private readonly Object lockObject;
 
         public PlayingControl()
         {
@@ -19,19 +22,34 @@ namespace WindowsFormsApp1.Views
 
         public void Configure(Game game)
         {
-            /*if (this.game != null)
-                return;*/
             this.game = game;
             InitializeGameObjects();
         }
 
         public void InitializeGameObjects()
         {
-            foreach (var road in game.roads.RoadsArray)
-                Controls.Add(road.Picture);
+            DoubleBuffered = true;
+            var timer = new Timer();
+            timer.Interval = 50;
+            timer.Tick += (sender, args) =>
+            {
+                Invalidate();
+            };
+            timer.Start();
+
+            Paint += (o, e) =>
+            {
+                var g = e.Graphics;
+                foreach (var road in game.roads.RoadsArray)
+                {
+                    PaintObject(road.Obj, Resources.road, g);
+                }
+
+                PaintObject(game.Car, Resources.Audi, g);
+            };
             var car = new ObjectWithPicture(game.Car);
-            Controls.Add(car.Picture);
-            Controls.SetChildIndex(car.Picture, 0);
+            car.Picture.Parent = game.roads.MiddleRoad.Picture;
+
 
             KeyDown += (_, args) => KeyPressEventHandler(args.KeyCode);
             /*var th = new Thread(delegate()
@@ -44,12 +62,20 @@ namespace WindowsFormsApp1.Views
             });*/
 
             // RandomCarGenerateInThread();
-            new Task(() => UpdateCarInThread(car)).Start();
+            //new Task(() => UpdateCarInThread(car)).Start();
             ///Task.Factory.StartNew(() => { UpdateCarInThread(car); });
             // UpdateCarInThread(car);
-            new Task(() => RandomCarGenerateInThread()).Start();
-            new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
-            InvalidateFormInThread(50);
+            Task.Run(() => { RandomCarGenerateInThread(); });
+            //new Task(() => RandomCarGenerateInThread()).Start();
+            // new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
+            //Task.Run(() => { InvalidateFormInThread(20); });
+
+            //InvalidateFormInThread(50);
+        }
+
+        private void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)
+        {
+            g.DrawImage(img, obj.Location.X, obj.Location.Y, img.Width, img.Height);
         }
 
         private void UpdateCarInThread(ObjectWithPicture car)
@@ -57,7 +83,8 @@ namespace WindowsFormsApp1.Views
             while (game.Stage == GameStage.Playing)
             {
                 Thread.Sleep(5);
-                car.UpdatePictureLocation();
+                BeginInvoke((Action) (() => car.UpdatePictureLocation()));
+                //  car.UpdatePictureLocation();
             }
         }
 
@@ -68,7 +95,9 @@ namespace WindowsFormsApp1.Views
             while (game.Stage == GameStage.Playing)
             {
                 Thread.Sleep(50);
-                    roads.ShiftDown(speed);
+                BeginInvoke((Action) (() => roads.ShiftDown(speed)));
+
+                //roads.ShiftDown(speed);
             }
 
             // });
@@ -82,15 +111,16 @@ namespace WindowsFormsApp1.Views
             {
                 Thread.Sleep(3000);
                 var car = new ObjectWithPicture(RandomCarGenerator.GetRandomCar());
-                //BeginInvoke(Controls.Add(car.Picture));
-                Controls.Add(car.Picture);
-                Controls.SetChildIndex(car.Picture, 0);
+                BeginInvoke((Action) (() => Controls.Add(car.Picture)));
+                // Controls.Add(car.Picture);
+                BeginInvoke((Action) (() => Controls.SetChildIndex(car.Picture, 0)));
+
+                //Controls.SetChildIndex(car.Picture, 0);
                 car.ShiftDownByTimer(50, 10);
             }
 
             //});
         }
-
 
         public void Stop()
         {
@@ -109,17 +139,18 @@ namespace WindowsFormsApp1.Views
 
         private void InvalidateFormInThread(int ms)
         {
-            Task.Factory.StartNew(() =>
+            //Task.Factory.StartNew(() =>
+            // {
+            while (game.Stage == GameStage.Playing)
             {
-                while (game.Stage == GameStage.Playing)
+                Thread.Sleep(ms);
+                //   lock (lockObject)
                 {
-                    Thread.Sleep(ms);
-                 //   lock (lockObject)
-                    {
-                        BeginInvoke(new Action(Invalidate));
-                    }
+                    BeginInvoke(new Action(Invalidate));
                 }
-            });
+            }
+
+            // });
         }
     }
 }
