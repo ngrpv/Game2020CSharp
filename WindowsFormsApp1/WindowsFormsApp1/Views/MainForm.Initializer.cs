@@ -33,7 +33,7 @@ namespace WindowsFormsApp1.Views
             WindowState = FormWindowState.Maximized;
             menuControl = new MenuControl(){ Dock = DockStyle.Fill };
             optionsControl1 = new OptionsControl(){Dock = DockStyle.Fill,Visible = false};
-            playingControl = new PlayingControl(){Dock = DockStyle.Fill, Visible = false};
+            playingControl = new PlayingControl();
             var table = new TableLayoutPanel();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));

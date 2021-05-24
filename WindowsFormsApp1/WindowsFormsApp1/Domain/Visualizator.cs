@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using WindowsFormsApp1.Properties;
@@ -10,7 +9,7 @@ namespace WindowsFormsApp1.Domain
 {
     public static  class Visualizator
     {
-        private static Dictionary<CarModel, Bitmap> carPictures = new Dictionary<CarModel, Bitmap>()
+        private static Dictionary<CarModel, Bitmap> carPictures = new ()
         {
             [CarModel.Police] = Resources.Police,
             [CarModel.Taxi] = Resources.taxi,
@@ -28,13 +27,13 @@ namespace WindowsFormsApp1.Domain
                 if (carPictures.ContainsKey(((Car) obj).CarModel))
                 {
                     var temp = carPictures[((Car) obj).CarModel];
-                    temp.MakeTransparent();
+                    //temp.MakeTransparent();
                     picture.Image = temp;
                 }
                 
                 picture.Location = car.Location;
-              //  picture.Dock = DockStyle.Fill;
-                 picture.BackgroundImageLayout = ImageLayout.None;
+               // picture.Dock = DockStyle.Fill;
+                // picture.BackgroundImageLayout = ImageLayout.None;
                 picture.BackColor = Color.Transparent;
                 picture.SizeMode = PictureBoxSizeMode.AutoSize;
                 //picture.Size = new Size(50, 50);
@@ -43,21 +42,20 @@ namespace WindowsFormsApp1.Domain
             if(obj.GetType() == typeof(RoadPattern))
             {
                 var road = obj as RoadPattern;
-                var picture = new PictureBox();
-                picture.Image = Resources.road;
-                picture.Location = road.Location;
-                picture.BackColor = Color.Transparent;
-                picture.SizeMode = PictureBoxSizeMode.AutoSize;
+                var picture = new PictureBox
+                {
+                    Image = Resources.road,
+                    Location = road.Location,
+                    BackColor = Color.Transparent,
+                    SizeMode = PictureBoxSizeMode.AutoSize
+                };
                 return picture;
             }
 
             return null;
         }
 
-        public static void UpdateLocation(this ObjectWithPicture objectWithPicture)
-        {
-            objectWithPicture.Picture.Location = objectWithPicture.Obj.Location;
-        }
+       
 
     }
     

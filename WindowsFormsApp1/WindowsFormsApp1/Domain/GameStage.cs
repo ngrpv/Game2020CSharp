@@ -7,6 +7,7 @@
         Selection,
         Playing,
         Finished,
-        Updated
+        Updated,
+        Stopped
     }
 }

@@ -7,7 +7,10 @@ namespace WindowsFormsApp1.Views
 {
     public  partial class MainForm : Form
     {
-        
+        // Баг с color.Transparent
+        // Не плавное обновление дорог
+        // Фриз машины после некоторого времени
+        // Не добавляются машины в другом потоке
         public Game game;
 
         public MainForm()
@@ -37,10 +40,14 @@ namespace WindowsFormsApp1.Views
                 case GameStage.Selection:
                     break;
                 case GameStage.Playing:
-                   // game.Start();
                     ShowScreen(playingControl);
                     break;
                 case GameStage.Updated:
+                    break;
+                case GameStage.Stopped:
+                    /*playingControl.InitializeGameObjects();*/
+                    playingControl.Stop();
+                    ShowScreen(menuControl);
                     break;
                 default:
                     ShowScreen(menuControl);
@@ -48,6 +55,9 @@ namespace WindowsFormsApp1.Views
             }
         }
 
+        private void StartGame()
+        {
+        }
         private void ShowScreen(IControl control)
         {
             HideScreens();
@@ -61,7 +71,6 @@ namespace WindowsFormsApp1.Views
             menuControl.Hide();
             optionsControl1.Hide();
             playingControl.Hide();
-            
         }
         
 

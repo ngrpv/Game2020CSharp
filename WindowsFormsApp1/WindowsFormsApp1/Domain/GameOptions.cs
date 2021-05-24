@@ -1,5 +1,4 @@
-﻿//using MediaPlayer;
-
+﻿
 using System;
 using System.Windows.Media;
 namespace WindowsFormsApp1.Domain
@@ -8,23 +7,16 @@ namespace WindowsFormsApp1.Domain
     {
         public double Volume
         {
-            get => s.Volume;
-            set => s.Volume = value;
+            get => MediaPlayer.Volume;
+            set => MediaPlayer.Volume = value;
         }
-
-
-        public System.Windows.Media.MediaPlayer s = new();
-
-        //private SoundPlayer _soundPlayer = new SoundPlayer(@"C:\Users\Garipov\Desktop\C#Game\Assets\VEHCar.wav");
-
+        
+        public System.Windows.Media.MediaPlayer MediaPlayer = new();
+        
         public GameOptions()
         {
-            s.Open(new Uri(@"C:\Users\Garipov\Desktop\C#Game\Assets\VEHCar.wav"));
+            MediaPlayer.Open(new Uri(@"C:\Users\Garipov\Desktop\C#Game\Assets\Tron-Legacy.wav"));
             //Volume = 1;
-            //_soundPlayer.Play();
-            //s.Play();
-
-            //Thread.Sleep(5000);
             //  s.Volume /= 2;
         }
         

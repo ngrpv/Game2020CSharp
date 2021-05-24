@@ -6,68 +6,65 @@ namespace WindowsFormsApp1.Domain
 {
     public class Game
     {
-        private GameStage stage = GameStage.NotStarted;
+        public GameStage Stage { get; private set; } = GameStage.NotStarted;
         public Car Car;
+        public Roads roads;
         public GameOptions Options = new GameOptions();
         
         public event Action<GameStage> StageChanged;
-        public event Action<GameStage> Update;
+      // public event Action<GameStage> Update;
 
-        /*public void SetVolume(int volume)
+        public void SetVolume(int volume)
         {
-            options.Volume = volume;
-        }*/
+            Options.Volume = volume;
+        }
         
         public void ChangeStage(GameStage gameStage)
         {
-            this.stage = gameStage;
-            StageChanged?.Invoke(stage);
+            this.Stage = gameStage;
+            StageChanged?.Invoke(Stage);
         }
 
         public void Start(Car car)
         {
+            roads = new Roads();
             Car = car;
             ChangeStage(GameStage.Playing);
-            Options.s.Play();
         }
 
         public void	 Start()
         {
             Start(new Car(new Point(960,800), CarModel.RaceCar));        
+            Options.MediaPlayer.Play();
         }
 
-        public void MoveCar(char keyChar)
+        public void Stop()
         {
-            switch (keyChar)
+            Car = null;
+            ChangeStage(GameStage.Stopped);
+        }
+
+        public void MoveCar(Keys keyCode)
+        {
+            switch (keyCode)
             {
-                case 'w':
+                case Keys.Up:
+                case Keys.W:
                     Car.Move(0, -1*Car.Speed);
                     break;
-                case 'a':
+                case Keys.Left:
+                case Keys.A:
                     Car.Move(-1*Car.Speed, 0);
                     break;
-                case 's':
+                case Keys.Down:
+                case Keys.S:
                     Car.Move(0, 1*Car.Speed);
                     break;
-                case 'd':
+                case Keys.Right:
+                case Keys.D:
                     Car.Move(1*Car.Speed, 0);
                     break;
             }
         }
     }
-
-    public static class RandomCarGenerator
-    {
-        private static Random _random = new Random();
-        private static Point[] locations = new[]
-            {new Point(200, -40), new Point(400, -40), new Point(600, -40), new Point(800, -40)};
-        public static Car GetRandomCar()
-        {
-            var model = _random.Next(4);
-            var location = _random.Next(0, locations.Length);
-            var car = new Car(locations[location], (CarModel) model);
-            return car;
-        }
-    }
-    
 }

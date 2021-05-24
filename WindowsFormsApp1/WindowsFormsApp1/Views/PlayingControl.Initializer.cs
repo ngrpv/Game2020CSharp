@@ -1,11 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
-using WindowsFormsApp1.Domain;
-using WindowsFormsApp1.Properties;
 
 namespace WindowsFormsApp1.Views
 {

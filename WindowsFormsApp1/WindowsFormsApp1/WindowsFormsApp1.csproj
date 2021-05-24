@@ -47,15 +47,13 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>bin\Debug\WindowsFormsApp1.exe</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Car.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameOptions.cs" />
     <Compile Include="Domain\GameStage.cs" />
+    <Compile Include="Domain\RandomCarGenerator.cs" />
     <Compile Include="Domain\Roads.cs" />
     <Compile Include="Domain\VisualizeableObject.cs" />
     <Compile Include="Domain\Player.cs" />

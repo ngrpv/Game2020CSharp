@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.TextFormatting;
 using WindowsFormsApp1.Domain;
 using WindowsFormsApp1.Properties;
 
@@ -11,9 +14,9 @@ namespace WindowsFormsApp1.Views
 {
     public partial class PlayingControl : UserControl, IControl
     {
-        
-        
         private Game game;
+        private readonly Object lockObject;
+
         public PlayingControl()
         {
             InitializeComponent();
@@ -21,39 +24,105 @@ namespace WindowsFormsApp1.Views
 
         public void Configure(Game game)
         {
-            if (this.game != null)
-                return;
-
+            /*if (this.game != null)
+                return;*/
             this.game = game;
-            var roads = new Roads();
-            foreach (var road in roads.RoadsArray)
+            InitializeGameObjects();
+        }
+
+        public void InitializeGameObjects()
+        {
+            foreach (var road in game.roads.RoadsArray)
                 Controls.Add(road.Picture);
             var car = new ObjectWithPicture(game.Car);
             Controls.Add(car.Picture);
-            Controls.SetChildIndex(car.Picture,0);
-            KeyPress += (_, args) => game.MoveCar(args.KeyChar);
-            Task.Factory.StartNew( () =>
+            Controls.SetChildIndex(car.Picture, 0);
+
+            KeyDown += (_, args) => KeyPressEventHandler(args.KeyCode);
+            /*var th = new Thread(delegate()
             {
-                while (true)
+                RandomCarGenerateInThread();
+                if (InvokeRequired)
                 {
-                    Thread.Sleep(5);
-                    car.UpdateLocation();
-                    BeginInvoke(new Action(Invalidate));
+                    this.Invoke(new MethodInvoker(this.Controls.Add()))
                 }
-            });
-            MoveRoadInThread(roads, game.Car.Speed);
+            });*/
+
+            // RandomCarGenerateInThread();
+            new Task(() => UpdateCarInThread(car)).Start();
+            ///Task.Factory.StartNew(() => { UpdateCarInThread(car); });
+            // UpdateCarInThread(car);
+            new Task(() => RandomCarGenerateInThread()).Start();
+            new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
+            InvalidateFormInThread(50);
         }
 
+        private void UpdateCarInThread(ObjectWithPicture car)
+        {
+            while (game.Stage == GameStage.Playing)
+            {
+                Thread.Sleep(5);
+                car.UpdatePictureLocation();
+            }
+        }
 
         private void MoveRoadInThread(Roads roads, int speed)
         {
+            //Task.Factory.StartNew(() =>
+            // {
+            while (game.Stage == GameStage.Playing)
+            {
+                Thread.Sleep(50);
+                    roads.ShiftDown(speed);
+            }
+
+            // });
+        }
+
+        private void RandomCarGenerateInThread()
+        {
+            //Task.Factory.StartNew(() =>
+            //{
+            while (game.Stage == GameStage.Playing)
+            {
+                Thread.Sleep(3000);
+                var car = new ObjectWithPicture(RandomCarGenerator.GetRandomCar());
+                //BeginInvoke(Controls.Add(car.Picture));
+                Controls.Add(car.Picture);
+                Controls.SetChildIndex(car.Picture, 0);
+                car.ShiftDownByTimer(50, 10);
+            }
+
+            //});
+        }
+
+
+        public void Stop()
+        {
+            //game.Stop();
+            Controls.Clear();
+        }
+
+        private void KeyPressEventHandler(Keys keyCode)
+        {
+            if (keyCode == Keys.Escape)
+            {
+                game.Stop();
+            }
+            else game.MoveCar(keyCode);
+        }
+
+        private void InvalidateFormInThread(int ms)
+        {
             Task.Factory.StartNew(() =>
             {
-                while (true)
+                while (game.Stage == GameStage.Playing)
                 {
-                    Thread.Sleep(20);
-                    roads.ShiftDown(speed);
-                    BeginInvoke(new Action(Invalidate));
+                    Thread.Sleep(ms);
+                    lock (lockObject)
+                    {
+                        BeginInvoke(new Action(Invalidate));
+                    }
                 }
             });
         }
