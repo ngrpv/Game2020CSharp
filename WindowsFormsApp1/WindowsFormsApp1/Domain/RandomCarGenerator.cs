@@ -7,7 +7,8 @@ namespace WindowsFormsApp1.Domain
     public static class RandomCarGenerator
     {
         private static Random _random = new();
-        private static Point[] locations = {new(200, -40), new(400, -40), new(600, -40), new(800, -40)};
+        private static int botsStartY = -180;
+        private static Point[] locations = {new(200, botsStartY), new(400, botsStartY), new(600, botsStartY), new(750, botsStartY), new(900,botsStartY), new (1100, botsStartY), new(1300, botsStartY)};
 
         private static Bitmap[] carModels = new[]
         {
@@ -17,6 +18,10 @@ namespace WindowsFormsApp1.Domain
         //private static Array carModels = Enum.GetValues(typeof(CarModel));
 
         public static Car GetRandomCar()
-            => new(locations[_random.Next(0, locations.Length)], (Bitmap)carModels.GetValue(_random.Next(carModels.Length)));
+        {
+            var img = (Bitmap) carModels.GetValue(_random.Next(carModels.Length));
+            img.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            return new(locations[_random.Next(0, locations.Length)], img);
+        }
     }
 }

@@ -9,15 +9,15 @@ namespace WindowsFormsApp1.Domain
 {
     public static  class Visualizator
     {
-        private static Dictionary<CarModel, Bitmap> carPictures = new ()
+        /*private static Dictionary<CarModel, Bitmap> carPictures = new ()
         {
             [CarModel.Police] = Resources.Police,
             [CarModel.Taxi] = Resources.taxi,
             [CarModel.RaceCar] = Resources.Audi,
             [CarModel.Truck] = Resources.truck,
-        };
+        };*/
 
-        public static Bitmap GetCarImage(CarModel model) => carPictures[model];
+        //public static Bitmap GetCarImage(CarModel model) => carPictures[model];
         
         /*
         public static PictureBox Initialize(VisualizeableObject obj)

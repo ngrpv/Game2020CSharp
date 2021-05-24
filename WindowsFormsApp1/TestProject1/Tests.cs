@@ -14,7 +14,7 @@ namespace TestProject1
         [TestCase( -2, -2 ,10,10)]
         public void Move_ShouldMoveOnDxDy(int x0, int y0, int dx, int dy)
         {
-            var car = new Car(new Point(x0, y0), CarModel.Taxi);
+            var car = new Car(new Point(x0, y0));
             car.Move(dx,dy);
             Assert.AreEqual(new Point(x0+dx,y0+dy), car.Location);
         }

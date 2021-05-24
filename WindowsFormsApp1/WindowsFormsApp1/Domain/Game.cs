@@ -37,7 +37,7 @@ namespace WindowsFormsApp1.Domain
 
         public void	 Start()
         {
-            Start(new Car(new Point(960,800), Resources.Audi));        
+            Start(new Car(new Point(960,800), Resources.Audi, 60));        
             Options.MediaPlayer.Play();
         }
 

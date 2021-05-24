@@ -55,25 +55,9 @@ namespace WindowsFormsApp1.Views
 
 
             KeyDown += (_, args) => KeyPressEventHandler(args.KeyCode);
-            /*var th = new Thread(delegate()
-            {
-                RandomCarGenerateInThread();
-                if (InvokeRequired)
-                {
-                    this.Invoke(new MethodInvoker(this.Controls.Add()))
-                }
-            });*/
-
-            // RandomCarGenerateInThread();
-            //new Task(() => UpdateCarInThread(car)).Start();
-            ///Task.Factory.StartNew(() => { UpdateCarInThread(car); });
-            // UpdateCarInThread(car);
             Task.Run(() => { RandomCarGenerateInThread(); });
-            //new Task(() => RandomCarGenerateInThread()).Start();
              new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
-            //Task.Run(() => { InvalidateFormInThread(20); });
 
-            //InvalidateFormInThread(50);
         }
 
         private void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)
@@ -135,22 +119,6 @@ namespace WindowsFormsApp1.Views
                 game.Stop();
             }
             else game.MoveCar(keyCode);
-        }
-
-        private void InvalidateFormInThread(int ms)
-        {
-            //Task.Factory.StartNew(() =>
-            // {
-            while (game.Stage == GameStage.Playing)
-            {
-                Thread.Sleep(ms);
-                //   lock (lockObject)
-                {
-                    BeginInvoke(new Action(Invalidate));
-                }
-            }
-
-            // });
         }
     }
 }
