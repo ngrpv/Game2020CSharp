@@ -16,9 +16,9 @@ namespace WindowsFormsApp1.Views
             Picture = picture;
         }
         
-        public ObjectWithPicture(VisualizeableObject obj) : this(obj, Visualizator.Initialize(obj))
+        /*public ObjectWithPicture(VisualizeableObject obj) : this(obj, Visualizator.Initialize(obj))
         {
-        }
+        }*/
 
         public void Move(int dx, int dy) 
         {

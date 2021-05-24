@@ -1,13 +1,17 @@
 ﻿using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.Domain
 {
     public abstract class VisualizeableObject
     {
         private Point _location;
+        public Bitmap Image { get; }
 
-        public VisualizeableObject(Point location)
+        public VisualizeableObject(Point location, Bitmap image)
         {
+            Image = image;
             _location = location;
         }
         public Point Location
@@ -20,6 +24,18 @@ namespace WindowsFormsApp1.Domain
         {
             _location.X += dx;
             _location.Y += dy;
+        }
+        
+        public void ShiftDownByTimer(int ms, int dy)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                while (_location.Y < 1100)
+                {
+                    Thread.Sleep(ms);
+                    Move(0, dy);
+                }
+            });
         }
     }
 }

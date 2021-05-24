@@ -16,14 +16,17 @@ namespace WindowsFormsApp1.Domain
             [CarModel.RaceCar] = Resources.Audi,
             [CarModel.Truck] = Resources.truck,
         };
+
+        public static Bitmap GetCarImage(CarModel model) => carPictures[model];
         
+        /*
         public static PictureBox Initialize(VisualizeableObject obj)
         {
             if (obj.GetType() != typeof(Car) && obj.GetType() != typeof(RoadPattern)) throw new ArgumentException();
             if (obj.GetType() == typeof(Car))
             {
                 var car = obj as Car;
-                var picture = new PictureBox();
+                //var picture = new PictureBox();
                 if (carPictures.ContainsKey(((Car) obj).CarModel))
                 {
                     var temp = carPictures[((Car) obj).CarModel];
@@ -54,6 +57,7 @@ namespace WindowsFormsApp1.Domain
 
             return null;
         }
+        */
 
        
 

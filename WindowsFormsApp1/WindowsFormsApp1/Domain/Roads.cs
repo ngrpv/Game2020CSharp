@@ -1,14 +1,15 @@
 ﻿using System.Drawing;
+using WindowsFormsApp1.Properties;
 using WindowsFormsApp1.Views;
 
 namespace WindowsFormsApp1.Domain
 {
     public class Roads
     {
-        public ObjectWithPicture UpperRoad { get; private set; }
-        public ObjectWithPicture MiddleRoad { get; private set; }
-        public ObjectWithPicture LowerRoad { get; private set; }
-        public ObjectWithPicture[] RoadsArray;
+        public RoadPattern UpperRoad { get; private set; }
+        public RoadPattern MiddleRoad { get; private set; }
+        public RoadPattern LowerRoad { get; private set; }
+        public RoadPattern[] RoadsArray;
         private static int PictureHeight = 1000;
         private static int clientHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size.Height;
 
@@ -18,9 +19,9 @@ namespace WindowsFormsApp1.Domain
         {
             (UpperRoad, MiddleRoad, LowerRoad) =
             (
-                new(new RoadPattern(location1)),
-                new(new RoadPattern(location2)),
-                new(new RoadPattern(location3))
+               new RoadPattern(location1),
+                new RoadPattern(location2),
+                new RoadPattern(location3)
             );
             RoadsArray = new[] {UpperRoad, MiddleRoad, LowerRoad};
         }
@@ -39,19 +40,19 @@ namespace WindowsFormsApp1.Domain
         
         public void ShiftDown(int dy)
         {   
-            MiddleRoad.SetLocation(new Point(0, MiddleRoad.GetLocation().Y+dy));
+            MiddleRoad.Location = (new Point(0, MiddleRoad.Location.Y+dy));
             RefreshLocations();
         }
 
         private void RefreshLocations()
         {
-            if (LowerRoad.GetLocation().Y > clientHeight+100)
+            if (LowerRoad.Location.Y > clientHeight+100)
             {
-                LowerRoad.SetLocation(new Point(0,MiddleRoad.GetLocation().Y-PictureHeight));
+                LowerRoad.Location = (new Point(0,MiddleRoad.Location.Y-PictureHeight));
                 (UpperRoad, MiddleRoad, LowerRoad) = (LowerRoad, UpperRoad, MiddleRoad);
             }
-            UpperRoad.SetLocation(new Point(0,MiddleRoad.GetLocation().Y-PictureHeight));
-            LowerRoad.SetLocation(new Point(0,MiddleRoad.GetLocation().Y+PictureHeight));
+            UpperRoad.Location = (new Point(0,MiddleRoad.Location.Y-PictureHeight));
+            LowerRoad.Location = (new Point(0,MiddleRoad.Location.Y+PictureHeight));
         }
     }
 }

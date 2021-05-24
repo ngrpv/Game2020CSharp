@@ -14,6 +14,7 @@ namespace WindowsFormsApp1.Views
     public partial class PlayingControl : UserControl, IControl
     {
         private Game game;
+        private int temp = 0;
 
         public PlayingControl()
         {
@@ -42,13 +43,15 @@ namespace WindowsFormsApp1.Views
                 var g = e.Graphics;
                 foreach (var road in game.roads.RoadsArray)
                 {
-                    PaintObject(road.Obj, Resources.road, g);
+                    PaintObject(road, road.Image, g);
                 }
-
                 PaintObject(game.Car, Resources.Audi, g);
+                foreach (var car in game.Bots)
+                {
+                    if(car == null) continue;
+                    PaintObject(car, car.Image, g);
+                }
             };
-            var car = new ObjectWithPicture(game.Car);
-            car.Picture.Parent = game.roads.MiddleRoad.Picture;
 
 
             KeyDown += (_, args) => KeyPressEventHandler(args.KeyCode);
@@ -67,7 +70,7 @@ namespace WindowsFormsApp1.Views
             // UpdateCarInThread(car);
             Task.Run(() => { RandomCarGenerateInThread(); });
             //new Task(() => RandomCarGenerateInThread()).Start();
-            // new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
+             new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
             //Task.Run(() => { InvalidateFormInThread(20); });
 
             //InvalidateFormInThread(50);
@@ -95,7 +98,7 @@ namespace WindowsFormsApp1.Views
             while (game.Stage == GameStage.Playing)
             {
                 Thread.Sleep(50);
-                BeginInvoke((Action) (() => roads.ShiftDown(speed)));
+                roads.ShiftDown(speed);
 
                 //roads.ShiftDown(speed);
             }
@@ -110,12 +113,9 @@ namespace WindowsFormsApp1.Views
             while (game.Stage == GameStage.Playing)
             {
                 Thread.Sleep(3000);
-                var car = new ObjectWithPicture(RandomCarGenerator.GetRandomCar());
-                BeginInvoke((Action) (() => Controls.Add(car.Picture)));
-                // Controls.Add(car.Picture);
-                BeginInvoke((Action) (() => Controls.SetChildIndex(car.Picture, 0)));
-
-                //Controls.SetChildIndex(car.Picture, 0);
+                var car = RandomCarGenerator.GetRandomCar();
+                game.Bots[temp] = car;
+                if (++temp > game.Bots.Length - 1) temp = 0;
                 car.ShiftDownByTimer(50, 10);
             }
 
