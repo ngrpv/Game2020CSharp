@@ -5,8 +5,7 @@ namespace WindowsFormsApp1.Domain
 {
     public class GameOptions
     {
-        public double Volume
-        {
+        public double Volume {
             get => MediaPlayer.Volume;
             set => MediaPlayer.Volume = value;
         }

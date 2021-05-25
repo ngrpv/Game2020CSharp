@@ -1,17 +1,10 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using WindowsFormsApp1.Domain;
 
 namespace WindowsFormsApp1.Views
 {
     public  partial class MainForm : Form
     {
-        // Баг с color.Transparent
-        // Не плавное обновление дорог
-        // Фриз машины после некоторого времени
-        // столкновение машин
-
-        // Не добавляются машины в другом потоке
         public Game game;
 
         public MainForm()

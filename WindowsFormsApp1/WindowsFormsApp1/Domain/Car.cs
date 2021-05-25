@@ -22,7 +22,7 @@ namespace WindowsFormsApp1.Domain
             HitBox = new HitBox(this,15);
             var timer = new Timer();
             timer.Interval = 10;
-            timer.Tick += (sender, args) =>
+            timer.Tick += (_, _) =>
             {
                 if (Speed > MinSpeed)
                     Speed -= 1;

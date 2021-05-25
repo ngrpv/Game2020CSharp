@@ -1,6 +1,4 @@
 ﻿using System.Drawing;
-using WindowsFormsApp1.Properties;
-using WindowsFormsApp1.Views;
 
 namespace WindowsFormsApp1.Domain
 {

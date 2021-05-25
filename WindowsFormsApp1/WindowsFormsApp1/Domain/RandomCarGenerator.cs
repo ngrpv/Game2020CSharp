@@ -8,20 +8,28 @@ namespace WindowsFormsApp1.Domain
     {
         private static Random _random = new();
         private static int botsStartY = -180;
-        private static Point[] locations = {new(200, botsStartY), new(400, botsStartY), new(600, botsStartY), new(750, botsStartY), new(900,botsStartY), new (1100, botsStartY), new(1300, botsStartY)};
-
-        private static Bitmap[] carModels = new[]
+        private static Point[] locations =
         {
-            Resources.taxi, Resources.truck, Resources.Ambulance, Resources.Audi, Resources.Black_viper,
+            new(200, botsStartY), 
+            new(400, botsStartY), 
+            new(600, botsStartY), 
+            new(750, botsStartY),
+            new(900, botsStartY), 
+            new(1100, botsStartY), 
+            new(1300, botsStartY)
+        };
+
+        private static Bitmap[] carModels = 
+        {
+            Resources.taxi, Resources.truck, Resources.Ambulance, Resources.Black_viper,
             Resources.Mini_truck, Resources.Police
         };
-        //private static Array carModels = Enum.GetValues(typeof(CarModel));
 
         public static Car GetRandomCar()
         {
-            var img = (Bitmap)((Bitmap) carModels.GetValue(_random.Next(carModels.Length))).Clone();
+            var img = (Bitmap) ((Bitmap) carModels.GetValue(_random.Next(carModels.Length))).Clone();
             img.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            return new(locations[_random.Next(0, locations.Length)], img);
+            return new Car(locations[_random.Next(0, locations.Length)], img);
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.Domain
 {
@@ -25,7 +23,5 @@ namespace WindowsFormsApp1.Domain
             _location.X += dx;
             _location.Y += dy;
         }
-        
-        
     }
 }
