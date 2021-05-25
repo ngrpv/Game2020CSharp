@@ -26,16 +26,6 @@ namespace WindowsFormsApp1.Domain
             _location.Y += dy;
         }
         
-        public void ShiftDownByTimer(int ms, int dy)
-        {
-            Task.Factory.StartNew(() =>
-            {
-                while (_location.Y < 1100)
-                {
-                    Thread.Sleep(ms);
-                    Move(0, dy);
-                }
-            });
-        }
+        
     }
 }

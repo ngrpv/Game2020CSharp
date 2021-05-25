@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -66,6 +67,7 @@ namespace WindowsFormsApp1.Views
             KeyUp += (_, args) => KeyUpEventHandler(_, args);
             Task.Run(() => { RandomCarGenerateInThread(); });
             Task.Run(() => { UpdateCarInThread();});
+            Task.Run(() => { CheckCollisions(); });
              new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
 
         }
@@ -200,6 +202,18 @@ namespace WindowsFormsApp1.Views
                 game.Stop();
             }
             else game.MoveCar(keyChar);
+        }
+
+        private void CheckCollisions()
+        {
+            while (game.Stage == GameStage.Playing)
+            {
+                Thread.Sleep(20);
+                foreach (var bot in game.Bots.Where(b=>b!=null))
+                {
+                    if (game.Car.HitBox.IsCollide(bot.HitBox)) game.Stop();
+                }
+            }
         }
     }
 }
