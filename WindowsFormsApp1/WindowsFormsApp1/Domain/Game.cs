@@ -37,7 +37,7 @@ namespace WindowsFormsApp1.Domain
 
         public void	 Start()
         {
-            Start(new Car(new Point(960,800), Resources.Audi, 60));        
+            Start(new Car(new Point(960,800), Resources.Audi, 10));        
             Options.MediaPlayer.Play();
         }
 
@@ -47,27 +47,32 @@ namespace WindowsFormsApp1.Domain
             ChangeStage(GameStage.Stopped);
         }
 
-        public void MoveCar(Keys keyCode)
+        public void MoveCar(char keyChar)
         {
-            switch (keyCode)
+            switch (keyChar)
             {
-                case Keys.Up:
-                case Keys.W:
-                    Car.Move(0, -1*Car.Speed);
+                case (char)Keys.Up:
+                case (char)Keys.W:
+                    Car.Move(0, -1);
                     break;
-                case Keys.Left:
-                case Keys.A:
-                    Car.Move(-1*Car.Speed, 0);
+                case (char)Keys.Left:
+                case (char)Keys.A:
+                    Car.Move(-1, 0);
                     break;
-                case Keys.Down:
-                case Keys.S:
-                    Car.Move(0, 1*Car.Speed);
+                case (char)Keys.Down:
+                case (char)Keys.S:
+                    Car.Move(0, 1);
                     break;
-                case Keys.Right:
-                case Keys.D:
-                    Car.Move(1*Car.Speed, 0);
+                case (char)Keys.Right:
+                case (char)Keys.D:
+                    Car.Move(1, 0);
                     break;
             }
         }
     }
+
+    /*public static class Physics
+    {
+        public void 
+    }*/
 }

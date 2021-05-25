@@ -53,10 +53,9 @@ namespace WindowsFormsApp1.Views
                 }
             };
 
-
-            KeyDown += (_, args) => KeyPressEventHandler(args.KeyCode);
+            KeyPress += (_, args) => KeyPressEventHandler(args.KeyChar);
             Task.Run(() => { RandomCarGenerateInThread(); });
-             new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
+             new Task(() => MoveRoadInThread(game.roads, (int)game.Car.Speed)).Start();
 
         }
 
@@ -82,7 +81,7 @@ namespace WindowsFormsApp1.Views
             while (game.Stage == GameStage.Playing)
             {
                 Thread.Sleep(50);
-                roads.ShiftDown(speed);
+                roads.ShiftDown((int)game.Car.Speed);
 
                 //roads.ShiftDown(speed);
             }
@@ -112,13 +111,13 @@ namespace WindowsFormsApp1.Views
             Controls.Clear();
         }
 
-        private void KeyPressEventHandler(Keys keyCode)
+        private void KeyPressEventHandler(char keyChar)
         {
-            if (keyCode == Keys.Escape)
+            if (keyChar == (char)Keys.Escape)
             {
                 game.Stop();
             }
-            else game.MoveCar(keyCode);
+            else game.MoveCar(keyChar);
         }
     }
 }

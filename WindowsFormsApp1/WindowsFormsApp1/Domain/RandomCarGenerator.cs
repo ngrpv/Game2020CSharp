@@ -19,7 +19,7 @@ namespace WindowsFormsApp1.Domain
 
         public static Car GetRandomCar()
         {
-            var img = (Bitmap) carModels.GetValue(_random.Next(carModels.Length));
+            var img = (Bitmap)((Bitmap) carModels.GetValue(_random.Next(carModels.Length))).Clone();
             img.RotateFlip(RotateFlipType.Rotate180FlipNone);
             return new(locations[_random.Next(0, locations.Length)], img);
         }
