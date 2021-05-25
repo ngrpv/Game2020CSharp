@@ -6,20 +6,22 @@ namespace WindowsFormsApp1.Domain
 {
     public class Car : VisualizeableObject
     {
-        public uint Speed { get; private set; } = 20;
+        public int Speed { get; private set; } = 20;
+        public readonly int MinSpeed = 10;
+
         public readonly int MaxSpeed = 50;
 
-        public uint Velocity { get; private set; } = 4;
+        public int Velocity { get; private set; } = 4;
         //public readonly CarModel CarModel;
 
-        public Car(Point location, Bitmap image, uint speed): base(location, image)
+        public Car(Point location, Bitmap image, int speed): base(location, image)
         {
             Speed = speed;
             var timer = new Timer();
             timer.Interval = 10;
             timer.Tick += (sender, args) =>
             {
-                if(Speed > 0) 
+                if(Speed > MinSpeed) 
                     Speed -= 1;
             };
             timer.Start();
@@ -37,9 +39,14 @@ namespace WindowsFormsApp1.Domain
 
         public new void Move(int dx, int dy)
         {
-            if(Speed<MaxSpeed && dy<0)
+            if (Speed < MaxSpeed && dy < 0)
+            {
                 Speed += Velocity;
-            base.Move((int) (dx*Speed * 20 / 10.0), (int) (dy*Speed * 20 / 1000.0));
+            }else if (Speed < MaxSpeed && dy > 0)
+            {
+                dy += 2;
+            }
+            base.Move((int) (dx*Speed * 20 / 100.0), (int) (dy*Speed * 50 / 1000.0));
         }
     }
     

@@ -52,19 +52,19 @@ namespace WindowsFormsApp1.Domain
             switch (keyChar)
             {
                 case (char)Keys.Up:
-                case (char)Keys.W:
+                case 'w':
                     Car.Move(0, -1);
                     break;
                 case (char)Keys.Left:
-                case (char)Keys.A:
+                case 'a':
                     Car.Move(-1, 0);
                     break;
                 case (char)Keys.Down:
-                case (char)Keys.S:
+                case 's':
                     Car.Move(0, 1);
                     break;
                 case (char)Keys.Right:
-                case (char)Keys.D:
+                case 'd':
                     Car.Move(1, 0);
                     break;
             }

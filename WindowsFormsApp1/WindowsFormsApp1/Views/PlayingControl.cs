@@ -4,8 +4,10 @@ using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 using WindowsFormsApp1.Domain;
 using WindowsFormsApp1.Properties;
+using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 using Timer = System.Windows.Forms.Timer;
 
 
@@ -15,6 +17,13 @@ namespace WindowsFormsApp1.Views
     {
         private Game game;
         private int temp = 0;
+        
+        bool leftKeyPressed = false, rightKeyPressed = false;
+        bool upKeyPressed = false, downKeyPressed = false;
+        
+        float steering = 0; //-1 is left, 0 is center, 1 is right
+        float throttle = 0; //0 is coasting, 1 is full throttle
+        float brakes = 0; //0 is no brakes, 1 is full brakes
 
         public PlayingControl()
         {
@@ -53,23 +62,96 @@ namespace WindowsFormsApp1.Views
                 }
             };
 
-            KeyPress += (_, args) => KeyPressEventHandler(args.KeyChar);
+            KeyDown += (_, args) => KeyDownEventHandler(_,args);
+            KeyUp += (_, args) => KeyUpEventHandler(_, args);
             Task.Run(() => { RandomCarGenerateInThread(); });
-             new Task(() => MoveRoadInThread(game.roads, (int)game.Car.Speed)).Start();
+            Task.Run(() => { UpdateCarInThread();});
+             new Task(() => MoveRoadInThread(game.roads, game.Car.Speed)).Start();
 
         }
+
+        private void KeyUpEventHandler(object sender, KeyEventArgs args)
+        {
+            switch (args.KeyCode)
+            {
+                case Keys.A:
+                case Keys.Left:
+                    leftKeyPressed = false;
+                    break;
+                case Keys.D:
+                case Keys.Right:
+                    rightKeyPressed = false;
+                    break;
+                case Keys.W:
+                case Keys.Up:
+                    upKeyPressed = false;
+                    break;
+                case Keys.S:
+                case Keys.Down:
+                    downKeyPressed = false;
+                    break;
+                default: 
+                    return; 
+            }
+            ProcessInput();
+        }
+
+        private void KeyDownEventHandler(object sender, KeyEventArgs args)
+        {
+            if (args.KeyCode == Keys.Escape)
+            {
+                game.Stop();
+            }
+            switch (args.KeyCode)
+            {
+                case Keys.A:
+                case Keys.Left:
+                    leftKeyPressed = true;
+                    break;
+                case Keys.D:
+                case Keys.Right:
+                    rightKeyPressed = true;
+                    break;
+                case Keys.W:
+                case Keys.Up:
+                    upKeyPressed = true;
+                    break;
+                case Keys.S:
+                case Keys.Down:
+                    downKeyPressed = true;
+                    break;
+                default: 
+                    return; 
+            }
+
+            ProcessInput();
+        }
+        
+        private void ProcessInput()
+        {
+            if (leftKeyPressed)
+                steering = -1;
+            else if (rightKeyPressed)
+                steering = 1;
+            else
+                steering = 0;
+
+            throttle = upKeyPressed ? -1 : 0;
+            brakes = downKeyPressed ? 1 : 0;
+        }
+        
 
         private void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)
         {
             g.DrawImage(img, obj.Location.X, obj.Location.Y, img.Width, img.Height);
         }
 
-        private void UpdateCarInThread(ObjectWithPicture car)
+        private void UpdateCarInThread()
         {
             while (game.Stage == GameStage.Playing)
             {
                 Thread.Sleep(5);
-                BeginInvoke((Action) (() => car.UpdatePictureLocation()));
+                game.Car.Move((int)steering, (int)(throttle+brakes));
                 //  car.UpdatePictureLocation();
             }
         }
