@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,9 +20,11 @@ namespace WindowsFormsApp1.Views
         private const int BotsGeneratingFrequence = 1000;
         private const int BotsMinSpeed = 5;
         private int botsArrayPointer;
-        
+        private bool gameIsOver;
+
         private bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
-        private float 
+
+        private float
             steering, //-1 is left, 0 is center, 1 is right
             throttle, //0 is coasting, 1 is full throttle
             brakes; //0 is no brakes, 1 is full brakes
@@ -37,12 +40,17 @@ namespace WindowsFormsApp1.Views
             InitializeGameObjects();
         }
 
-        public void InitializeGameObjects()
+        private void InitializeGameObjects()
         {
             DoubleBuffered = true;
             var timer = new Timer {Interval = 50};
-            timer.Tick += (_, _) => { Invalidate(); };
+            timer.Tick += (_, _) =>
+            {
+                if(gameIsOver) timer.Stop();
+                Invalidate();
+            };
             timer.Start();
+            
 
             Paint += (_, e) =>
             {
@@ -62,8 +70,8 @@ namespace WindowsFormsApp1.Views
 
             KeyDown += (_, args) => KeyDownEventHandler(args);
             KeyUp += (_, args) => KeyUpEventHandler(args);
-            
-            InvokeInThreads(RandomCarGenerate,UpdateCar,CheckCollisions,()=>MoveRoad(game.Roads));
+
+            InvokeInThreads(RandomCarGenerate, UpdateCar, CheckCollisions, () => MoveRoad(game.Roads));
         }
 
         private static void InvokeInThreads(params Action[] actions)
@@ -72,15 +80,45 @@ namespace WindowsFormsApp1.Views
                 Task.Run(action);
         }
 
+        public void Freeze()
+        {
+            gameIsOver = true;
+            Thread.Sleep(5);
+            var gameOverPanel = new Panel()
+            {
+                BackgroundImage = Resources.gameovertext,
+                 Size = new Size(700,400),
+                BackColor = Color.Transparent,
+                Location = new(610,340),
+            };
+            var toMenu = new PictureBox()
+            {
+                Image = Resources.lil_menu,
+                Location = new(200,321),
+                SizeMode = PictureBoxSizeMode.AutoSize
+            };
+            var restartBtn = new PictureBox() {Image = Resources.lil_again, Location = new(110,179), SizeMode = PictureBoxSizeMode.AutoSize};
+            toMenu.Click += (_, _) => game.Stop();
+            restartBtn.Click += (_, _) =>
+            {
+                game.Stop();
+                game.Start();
+            }; 
+            gameOverPanel.Controls.Add(toMenu);
+            gameOverPanel.Controls.Add(restartBtn);
+            BeginInvoke((Action)(()=>Controls.Add(gameOverPanel)));
+        }
+
         public void Stop()
         {
+            gameIsOver = true;
             Controls.Clear();
         }
-        
-        private static void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)                                                   
-        {                                                                                                                                  
-            g.DrawImage(img, obj.Location.X, obj.Location.Y, img.Width, img.Height);                                                       
-        }                                                                                                                                  
+
+        private static void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)
+        {
+            g.DrawImage(img, obj.Location.X, obj.Location.Y, img.Width, img.Height);
+        }
 
         #region KeysHandler
 
@@ -107,6 +145,7 @@ namespace WindowsFormsApp1.Views
                 default:
                     return;
             }
+
             ProcessInput();
         }
 
@@ -156,13 +195,13 @@ namespace WindowsFormsApp1.Views
         }
 
         #endregion
-        
+
 
         #region ThreadMethods
 
         private void UpdateCar()
         {
-            while (game.Stage == GameStage.Playing)
+            while (!gameIsOver)
             {
                 Thread.Sleep(5);
                 game.Car.Move((int) steering, (int) (throttle + brakes));
@@ -171,16 +210,16 @@ namespace WindowsFormsApp1.Views
 
         private void MoveRoad(Roads roads)
         {
-            while (game.Stage == GameStage.Playing)
+            while (!gameIsOver)
             {
                 Thread.Sleep(50);
-                roads.ShiftDown((int)(game.Car.Speed*0.7));
+                roads.ShiftDown((int) (game.Car.Speed * 0.7));
             }
         }
 
         private void RandomCarGenerate()
         {
-            while (game.Stage == GameStage.Playing)
+            while (!gameIsOver)
             {
                 Thread.Sleep(BotsGeneratingFrequence);
                 var car = RandomCarGenerator.GetRandomCar();
@@ -191,7 +230,7 @@ namespace WindowsFormsApp1.Views
                     while (car.Location.Y < 1100)
                     {
                         Thread.Sleep(20);
-                        car.ShiftDown((int)(game.Car.Speed*0.65+BotsMinSpeed));
+                        car.ShiftDown((int) (game.Car.Speed * 0.65 + BotsMinSpeed));
                     }
                 });
             }
@@ -199,12 +238,12 @@ namespace WindowsFormsApp1.Views
 
         private void CheckCollisions()
         {
-            while (game.Stage == GameStage.Playing)
+            while (!gameIsOver)
             {
                 Thread.Sleep(20);
                 foreach (var bot in game.Bots.Where(b => b != null))
                 {
-                    if (game.Car.HitBox.IsCollide(bot.HitBox)) game.Stop();
+                    if (game.Car.HitBox.IsCollide(bot.HitBox)) Freeze();/*game.Stop();*/
                 }
             }
         }

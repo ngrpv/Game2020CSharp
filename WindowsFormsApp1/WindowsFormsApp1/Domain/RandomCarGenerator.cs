@@ -6,21 +6,22 @@ namespace WindowsFormsApp1.Domain
 {
     public static class RandomCarGenerator
     {
-        private static Random _random = new();
-        private static int botsStartY = -200;
-        private static Point[] locations =
+        private static readonly Random Random = new();
+        private const int BotsStartY = -200;
+
+        private static readonly Point[] Locations =
         {
-            new(300, botsStartY), 
-            new(450, botsStartY), 
-            new(600, botsStartY), 
-            new(750, botsStartY),
-            new(1000, botsStartY), 
-            new(1130, botsStartY), 
-            new(1350, botsStartY),
-            new(1500, botsStartY)
+            new(300, BotsStartY), 
+            new(450, BotsStartY), 
+            new(600, BotsStartY), 
+            new(750, BotsStartY),
+            new(1000, BotsStartY), 
+            new(1130, BotsStartY), 
+            new(1350, BotsStartY),
+            new(1500, BotsStartY)
         };
 
-        private static Bitmap[] carModels = 
+        private static readonly Bitmap[] CarModels = 
         {
             Resources.taxi, Resources.truck, Resources.Ambulance, Resources.Black_viper,
             Resources.Mini_truck, Resources.Police
@@ -28,9 +29,9 @@ namespace WindowsFormsApp1.Domain
 
         public static Car GetRandomCar()
         {
-            var img = (Bitmap) ((Bitmap) carModels.GetValue(_random.Next(carModels.Length))).Clone();
+            var img = (Bitmap) ((Bitmap) CarModels.GetValue(Random.Next(CarModels.Length))).Clone();
             img.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            return new Car(locations[_random.Next(0, locations.Length)], img);
+            return new Car(Locations[Random.Next(0, Locations.Length)], img);
         }
     }
 }

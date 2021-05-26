@@ -7,7 +7,7 @@ namespace WindowsFormsApp1.Domain
         protected Point _location;
         public Bitmap Image { get; }
 
-        public VisualizeableObject(Point location, Bitmap image)
+        protected VisualizeableObject(Point location, Bitmap image)
         {
             Image = image;
             _location = location;
@@ -18,7 +18,7 @@ namespace WindowsFormsApp1.Domain
             set => _location = value;
         }
 
-        public void Move(int dx = 0, int dy = 0)
+        protected void Move(int dx = 0, int dy = 0)
         {
             _location.X += dx;
             _location.Y += dy;

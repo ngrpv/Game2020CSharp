@@ -12,13 +12,13 @@ namespace WindowsFormsApp1.Domain
         public readonly int MinSpeed = 0;
         public readonly int MaxSpeed = 50;
         public bool IsBot = true;
-        private int maxY = 1030;
-        private int minY = 0;
-        private int maxX = 1600;
-        private int minX = 230;
+        private const int MaxY = 1030;
+        private const int MinY = 0;
+        private const int MaxX = 1600;
+        private const int MinX = 230;
 
-        public int Velocity { get; private set; } = 3;
-        public HitBox HitBox { get; private set; }
+        public int Velocity { get; } = 3;
+        public HitBox HitBox { get; }
 
         public Car(Point location, Bitmap image, int speed) : base(location, image)
         {
@@ -56,8 +56,8 @@ namespace WindowsFormsApp1.Domain
 
             if (!IsBot)
             {
-                if (Location.X > maxX && dx > 0 || Location.X < minX && dx < 0) dx = 0;
-                if (Location.Y > maxY && dy > 0 || Location.Y < minY && dy < 0) dy = 0;
+                if (Location.X > MaxX && dx > 0 || Location.X < MinX && dx < 0) dx = 0;
+                if (Location.Y > MaxY && dy > 0 || Location.Y < MinY && dy < 0) dy = 0;
             }
 
             base.Move((int) (dx * 90 / 10), (int) (dy * Speed * 50 / 1000.0));

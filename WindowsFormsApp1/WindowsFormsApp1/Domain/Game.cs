@@ -9,7 +9,7 @@ namespace WindowsFormsApp1.Domain
         public GameStage Stage { get; private set; } = GameStage.NotStarted;
         public Car Car;
         public Roads Roads;
-        public GameOptions Options = new ();
+        public readonly GameOptions Options = new ();
         public Car[] Bots;
         
         public event Action<GameStage> StageChanged;

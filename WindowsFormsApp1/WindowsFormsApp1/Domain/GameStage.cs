@@ -8,6 +8,7 @@
         Playing,
         Finished,
         Updated,
-        Stopped
+        Stopped,
+        Freezed
     }
 }

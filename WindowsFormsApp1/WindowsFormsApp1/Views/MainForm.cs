@@ -5,7 +5,7 @@ namespace WindowsFormsApp1.Views
 {
     public  partial class MainForm : Form
     {
-        public Game game;
+        private Game game;
 
         public MainForm()
         {
@@ -22,7 +22,7 @@ namespace WindowsFormsApp1.Views
             switch (stage)
             {
                 case GameStage.Options:
-                    ShowScreen(optionsControl1);
+                    ShowScreen(optionsControl);
                     game.Options.Volume /= 10;
                     break;
                 case GameStage.Finished:
@@ -43,6 +43,9 @@ namespace WindowsFormsApp1.Views
                     playingControl.Stop();
                     ShowScreen(menuControl);
                     break;
+                case GameStage.Freezed:
+                    ShowScreen(_gameOverControl);
+                    break;
                 default:
                     ShowScreen(menuControl);
                     break;
@@ -60,7 +63,7 @@ namespace WindowsFormsApp1.Views
         private void HideScreens()
         {
             menuControl.Hide();
-            optionsControl1.Hide();
+            optionsControl.Hide();
             playingControl.Hide();
         }
         

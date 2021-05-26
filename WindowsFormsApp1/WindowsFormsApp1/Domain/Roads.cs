@@ -4,12 +4,12 @@ namespace WindowsFormsApp1.Domain
 {
     public class Roads
     {
-        public RoadPattern UpperRoad { get; private set; }
-        public RoadPattern MiddleRoad { get; private set; }
-        public RoadPattern LowerRoad { get; private set; }
-        public RoadPattern[] RoadsArray;
-        private static int PictureHeight = 1000;
-        private static int clientHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size.Height;
+        private RoadPattern UpperRoad { get; set; }
+        private RoadPattern MiddleRoad { get; set; }
+        private RoadPattern LowerRoad { get; set; }
+        public readonly RoadPattern[] RoadsArray;
+        private static readonly int PictureHeight = 1000;
+        private static readonly int ClientHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size.Height;
 
         #region Contrustors
 
@@ -44,7 +44,7 @@ namespace WindowsFormsApp1.Domain
 
         private void RefreshLocations()
         {
-            if (LowerRoad.Location.Y > clientHeight+100)
+            if (LowerRoad.Location.Y > ClientHeight+100)
             {
                 LowerRoad.Location = (new Point(0,MiddleRoad.Location.Y-PictureHeight));
                 (UpperRoad, MiddleRoad, LowerRoad) = (LowerRoad, UpperRoad, MiddleRoad);

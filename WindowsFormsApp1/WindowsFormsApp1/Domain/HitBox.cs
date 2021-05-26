@@ -4,7 +4,7 @@ namespace WindowsFormsApp1.Domain
 {
     public class HitBox
     {
-        private int difference;
+        private readonly int difference;
         private Rectangle box;
 
         public HitBox(Car car)

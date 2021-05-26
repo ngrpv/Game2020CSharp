@@ -10,10 +10,11 @@ namespace WindowsFormsApp1.Views
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
-        
-        public OptionsControl optionsControl1;
-        public MenuControl menuControl;
-        public PlayingControl playingControl;
+
+        private OptionsControl optionsControl;
+        private MenuControl menuControl;
+        private PlayingControl playingControl;
+        private GameOverControl _gameOverControl;
         
         /// <summary>
         /// Clean up any resources being used.
@@ -32,15 +33,17 @@ namespace WindowsFormsApp1.Views
             AutoScaleMode = AutoScaleMode.None;
             WindowState = FormWindowState.Maximized;
             menuControl = new MenuControl(){ Dock = DockStyle.Fill };
-            optionsControl1 = new OptionsControl(){Dock = DockStyle.Fill,Visible = false};
+            optionsControl = new OptionsControl(){Dock = DockStyle.Fill,Visible = false};
             playingControl = new PlayingControl();
+            _gameOverControl = new GameOverControl();
             var table = new TableLayoutPanel();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             table.Dock = DockStyle.Fill;
             Controls.Add(menuControl);
-            Controls.Add(optionsControl1);
+            Controls.Add(optionsControl);
             Controls.Add(playingControl);
+            Controls.Add(_gameOverControl);
             
             //Controls.Add(table);
         }

@@ -10,7 +10,7 @@ namespace WindowsFormsApp1.Domain
             set => MediaPlayer.Volume = value;
         }
         
-        public System.Windows.Media.MediaPlayer MediaPlayer = new();
+        public readonly System.Windows.Media.MediaPlayer MediaPlayer = new();
         
         public GameOptions()
         {
