@@ -9,17 +9,17 @@ namespace WindowsFormsApp1.Domain
     public class Car : VisualizeableObject
     {
         public int Speed { get; private set; } = 20;
-        public readonly int MinSpeed = 10;
+        public readonly int MinSpeed = 0;
 
         public readonly int MaxSpeed = 50;
 
-        public int Velocity { get; private set; } = 4;
+        public int Velocity { get; private set; } = 3;
         public HitBox HitBox { get; private set; }
-        
+
         public Car(Point location, Bitmap image, int speed) : base(location, image)
         {
             Speed = speed;
-            HitBox = new HitBox(this,15);
+            HitBox = new HitBox(this, 15);
             var timer = new Timer();
             timer.Interval = 10;
             timer.Tick += (_, _) =>
@@ -48,21 +48,15 @@ namespace WindowsFormsApp1.Domain
             {
                 dy += 2;
             }
+
             HitBox.Refresh(Location);
-            base.Move((int) (dx * Speed * 20 / 100.0), (int) (dy * Speed * 50 / 1000.0));
+            base.Move((int) (dx * 90 / 10), (int) (dy * Speed * 50 / 1000.0));
         }
-        
-        public void ShiftDownByTimer(int ms, int dy)
+
+        public void ShiftDown(int dy)
         {
-            Task.Factory.StartNew(() =>
-            {
-                while (Location.Y < 1100)
-                {
-                    Thread.Sleep(ms);
-                    Move(0, dy);
-                    HitBox.Refresh(Location);
-                }
-            });
+            Move(0, dy);
+            HitBox.Refresh(Location);
         }
     }
 }

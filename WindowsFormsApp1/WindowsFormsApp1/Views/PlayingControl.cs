@@ -13,11 +13,12 @@ namespace WindowsFormsApp1.Views
 {
     public partial class PlayingControl : UserControl, IControl
     {
+        public int BotsGeneratingFrequence = 1000;
+        private int botsMinSpeed = 5;
         private Game game;
         private int botsArrayPointer;
-
         private bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
-
+        
         private float steering, //-1 is left, 0 is center, 1 is right
             throttle, //0 is coasting, 1 is full throttle
             brakes; //0 is no brakes, 1 is full brakes
@@ -156,7 +157,7 @@ namespace WindowsFormsApp1.Views
             while (game.Stage == GameStage.Playing)
             {
                 Thread.Sleep(50);
-                roads.ShiftDown(game.Car.Speed);
+                roads.ShiftDown((int)(game.Car.Speed*0.7));
             }
         }
 
@@ -164,11 +165,18 @@ namespace WindowsFormsApp1.Views
         {
             while (game.Stage == GameStage.Playing)
             {
-                Thread.Sleep(3000);
+                Thread.Sleep(BotsGeneratingFrequence);
                 var car = RandomCarGenerator.GetRandomCar();
                 game.Bots[botsArrayPointer] = car;
-                if (++botsArrayPointer > game.Bots.Length - 1) botsArrayPointer = 0;
-                car.ShiftDownByTimer(50, 10);
+                if (++botsArrayPointer >= game.Bots.Length) botsArrayPointer = 0;
+                Task.Run(() =>
+                {
+                    while (car.Location.Y < 1100)
+                    {
+                        Thread.Sleep(20);
+                        car.ShiftDown((int)(game.Car.Speed*0.65+botsMinSpeed));
+                    }
+                });
             }
         }
 
