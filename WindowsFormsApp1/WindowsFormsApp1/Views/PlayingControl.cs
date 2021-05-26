@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,13 +14,15 @@ namespace WindowsFormsApp1.Views
 {
     public partial class PlayingControl : UserControl, IControl
     {
-        public int BotsGeneratingFrequence = 1000;
-        private int botsMinSpeed = 5;
         private Game game;
+
+        private const int BotsGeneratingFrequence = 1000;
+        private const int BotsMinSpeed = 5;
         private int botsArrayPointer;
-        private bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
         
-        private float steering, //-1 is left, 0 is center, 1 is right
+        private bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
+        private float 
+            steering, //-1 is left, 0 is center, 1 is right
             throttle, //0 is coasting, 1 is full throttle
             brakes; //0 is no brakes, 1 is full brakes
 
@@ -59,11 +62,27 @@ namespace WindowsFormsApp1.Views
 
             KeyDown += (_, args) => KeyDownEventHandler(args);
             KeyUp += (_, args) => KeyUpEventHandler(args);
-            Task.Run(() => { RandomCarGenerateInThread(); });
-            Task.Run(() => { UpdateCarInThread(); });
-            Task.Run(() => { CheckCollisions(); });
-            new Task(() => MoveRoadInThread(game.Roads)).Start();
+            
+            InvokeInThreads(RandomCarGenerate,UpdateCar,CheckCollisions,()=>MoveRoad(game.Roads));
         }
+
+        private static void InvokeInThreads(params Action[] actions)
+        {
+            foreach (var action in actions)
+                Task.Run(action);
+        }
+
+        public void Stop()
+        {
+            Controls.Clear();
+        }
+        
+        private static void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)                                                   
+        {                                                                                                                                  
+            g.DrawImage(img, obj.Location.X, obj.Location.Y, img.Width, img.Height);                                                       
+        }                                                                                                                                  
+
+        #region KeysHandler
 
         private void KeyUpEventHandler(KeyEventArgs args)
         {
@@ -88,7 +107,6 @@ namespace WindowsFormsApp1.Views
                 default:
                     return;
             }
-
             ProcessInput();
         }
 
@@ -137,13 +155,12 @@ namespace WindowsFormsApp1.Views
             brakes = downKeyPressed ? 1 : 0;
         }
 
+        #endregion
+        
 
-        private static void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)
-        {
-            g.DrawImage(img, obj.Location.X, obj.Location.Y, img.Width, img.Height);
-        }
+        #region ThreadMethods
 
-        private void UpdateCarInThread()
+        private void UpdateCar()
         {
             while (game.Stage == GameStage.Playing)
             {
@@ -152,7 +169,7 @@ namespace WindowsFormsApp1.Views
             }
         }
 
-        private void MoveRoadInThread(Roads roads)
+        private void MoveRoad(Roads roads)
         {
             while (game.Stage == GameStage.Playing)
             {
@@ -161,7 +178,7 @@ namespace WindowsFormsApp1.Views
             }
         }
 
-        private void RandomCarGenerateInThread()
+        private void RandomCarGenerate()
         {
             while (game.Stage == GameStage.Playing)
             {
@@ -174,15 +191,10 @@ namespace WindowsFormsApp1.Views
                     while (car.Location.Y < 1100)
                     {
                         Thread.Sleep(20);
-                        car.ShiftDown((int)(game.Car.Speed*0.65+botsMinSpeed));
+                        car.ShiftDown((int)(game.Car.Speed*0.65+BotsMinSpeed));
                     }
                 });
             }
-        }
-
-        public void Stop()
-        {
-            Controls.Clear();
         }
 
         private void CheckCollisions()
@@ -196,5 +208,7 @@ namespace WindowsFormsApp1.Views
                 }
             }
         }
+
+        #endregion
     }
 }

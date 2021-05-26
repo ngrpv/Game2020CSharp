@@ -24,6 +24,7 @@ namespace WindowsFormsApp1.Domain
         {
             Roads = new Roads();
             Car = car;
+            Car.IsBot = false;
             Bots = new Car[6];
             ChangeStage(GameStage.Playing);
         }

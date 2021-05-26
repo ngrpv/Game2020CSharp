@@ -10,8 +10,12 @@ namespace WindowsFormsApp1.Domain
     {
         public int Speed { get; private set; } = 20;
         public readonly int MinSpeed = 0;
-
         public readonly int MaxSpeed = 50;
+        public bool IsBot = true;
+        private int maxY = 1030;
+        private int minY = 0;
+        private int maxX = 1600;
+        private int minX = 230;
 
         public int Velocity { get; private set; } = 3;
         public HitBox HitBox { get; private set; }
@@ -46,11 +50,18 @@ namespace WindowsFormsApp1.Domain
             }
             else if (Speed < MaxSpeed && dy > 0)
             {
-                dy += 2;
+                dy += 5;
+                Speed = 10;
             }
 
-            HitBox.Refresh(Location);
+            if (!IsBot)
+            {
+                if (Location.X > maxX && dx > 0 || Location.X < minX && dx < 0) dx = 0;
+                if (Location.Y > maxY && dy > 0 || Location.Y < minY && dy < 0) dy = 0;
+            }
+
             base.Move((int) (dx * 90 / 10), (int) (dy * Speed * 50 / 1000.0));
+            HitBox.Refresh(Location);
         }
 
         public void ShiftDown(int dy)
