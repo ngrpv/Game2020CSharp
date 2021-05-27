@@ -37,7 +37,7 @@ namespace WindowsFormsApp1.Domain
 
         public void Stop()
         {
-            Car = null;
+            
             ChangeStage(GameStage.Stopped);
         }
     }

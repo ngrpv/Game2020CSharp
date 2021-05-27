@@ -37,6 +37,7 @@ namespace WindowsFormsApp1.Views
         public void Configure(Game game)
         {
             this.game = game;
+            gameIsOver = false;
             InitializeGameObjects();
         }
 
@@ -226,10 +227,11 @@ namespace WindowsFormsApp1.Views
                 game.Bots[botsArrayPointer] = car;
                 if (++botsArrayPointer >= game.Bots.Length) botsArrayPointer = 0;
                 Task.Run(() =>
-                {
+                { 
                     while (car.Location.Y < 1100)
                     {
                         Thread.Sleep(20);
+                        if(game.Car!=null)
                         car.ShiftDown((int) (game.Car.Speed * 0.65 + BotsMinSpeed));
                     }
                 });

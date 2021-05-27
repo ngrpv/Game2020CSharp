@@ -28,7 +28,14 @@ namespace WindowsFormsApp1.Views
         
         private void InitializeComponent()
         {
-            Dock = DockStyle.Fill;
+            this.SuspendLayout();
+            // 
+            // PlayingControl
+            // 
+            this.Name = "PlayingControl";
+            this.Size = new System.Drawing.Size(1920, 1080);
+            this.ResumeLayout(false);
+
         }
 
        // private PictureBox carPicture;
