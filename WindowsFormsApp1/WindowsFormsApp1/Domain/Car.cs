@@ -9,15 +9,15 @@ namespace WindowsFormsApp1.Domain
     public class Car : VisualizeableObject
     {
         public int Speed { get; private set; } = 20;
-        public readonly int MinSpeed = 0;
+        public readonly int MinSpeed = 10;
         public readonly int MaxSpeed = 50;
         public bool IsBot = true;
         private const int MaxY = 1030;
-        private const int MinY = 0;
+        private const int MinY = 700;
         private const int MaxX = 1600;
         private const int MinX = 230;
 
-        public int Velocity { get; } = 3;
+        public int Acceleration { get; } = 3;
         public HitBox HitBox { get; }
 
         public Car(Point location, Bitmap image, int speed) : base(location, image)
@@ -25,7 +25,7 @@ namespace WindowsFormsApp1.Domain
             Speed = speed;
             HitBox = new HitBox(this, 15);
             var timer = new Timer();
-            timer.Interval = 10000;
+            timer.Interval = 50;
             timer.Tick += (_, _) =>
             {
                 if (Speed > MinSpeed)
@@ -46,7 +46,7 @@ namespace WindowsFormsApp1.Domain
         {
             if (Speed < MaxSpeed && dy < 0)
             {
-                Speed += Velocity;
+                Speed += Acceleration;
             }
             else if (Speed < MaxSpeed && dy > 0)
             {

@@ -47,11 +47,11 @@ namespace WindowsFormsApp1.Views
             var timer = new Timer {Interval = 50};
             timer.Tick += (_, _) =>
             {
-                if(gameIsOver) timer.Stop();
+                if (gameIsOver) timer.Stop();
                 Invalidate();
             };
             timer.Start();
-            
+
 
             Paint += (_, e) =>
             {
@@ -88,26 +88,30 @@ namespace WindowsFormsApp1.Views
             var gameOverPanel = new Panel()
             {
                 BackgroundImage = Resources.gameovertext,
-                 Size = new Size(700,400),
+                Size = new Size(700, 400),
                 BackColor = Color.Transparent,
-                Location = new(610,340),
+                Location = new(610, 340),
             };
-            var toMenu = new PictureBox()
+            var toMenuButton = new PictureBox()
             {
                 Image = Resources.lil_menu,
-                Location = new(200,321),
+                Location = new(200, 321),
                 SizeMode = PictureBoxSizeMode.AutoSize
             };
-            var restartBtn = new PictureBox() {Image = Resources.lil_again, Location = new(110,179), SizeMode = PictureBoxSizeMode.AutoSize};
-            toMenu.Click += (_, _) => game.Stop();
-            restartBtn.Click += (_, _) =>
+            var restartButton = new PictureBox()
             {
-                game.Stop();
-                game.Start();
-            }; 
-            gameOverPanel.Controls.Add(toMenu);
-            gameOverPanel.Controls.Add(restartBtn);
-            BeginInvoke((Action)(()=>Controls.Add(gameOverPanel)));
+                Image = Resources.lil_again, 
+                Location = new(200, 239), 
+                SizeMode = PictureBoxSizeMode.AutoSize
+            };
+            toMenuButton.Click += (_, _) => game.Stop();
+            restartButton.Click += (_, _) =>
+            {
+                Restart();
+            };
+            gameOverPanel.Controls.Add(toMenuButton);
+            gameOverPanel.Controls.Add(restartButton);
+            BeginInvoke((Action) (() => Controls.Add(gameOverPanel)));
         }
 
         public void Stop()
@@ -119,6 +123,13 @@ namespace WindowsFormsApp1.Views
         private static void PaintObject(VisualizeableObject obj, Bitmap img, Graphics g)
         {
             g.DrawImage(img, obj.Location.X, obj.Location.Y, img.Width, img.Height);
+        }
+
+        private void Restart()
+        {
+            gameIsOver = true;
+            Controls.Clear();
+            game.Start();
         }
 
         #region KeysHandler
@@ -227,12 +238,12 @@ namespace WindowsFormsApp1.Views
                 game.Bots[botsArrayPointer] = car;
                 if (++botsArrayPointer >= game.Bots.Length) botsArrayPointer = 0;
                 Task.Run(() =>
-                { 
+                {
                     while (car.Location.Y < 1100)
                     {
                         Thread.Sleep(20);
-                        if(game.Car!=null)
-                        car.ShiftDown((int) (game.Car.Speed * 0.65 + BotsMinSpeed));
+                        if (game.Car != null)
+                            car.ShiftDown((int) (car.Speed  + BotsMinSpeed + game.Car.Speed));
                     }
                 });
             }
@@ -245,7 +256,7 @@ namespace WindowsFormsApp1.Views
                 Thread.Sleep(20);
                 foreach (var bot in game.Bots.Where(b => b != null))
                 {
-                    if (game.Car.HitBox.IsCollide(bot.HitBox)) Freeze();/*game.Stop();*/
+                    if (game.Car.HitBox.IsCollide(bot.HitBox)) Freeze(); /*game.Stop();*/
                 }
             }
         }

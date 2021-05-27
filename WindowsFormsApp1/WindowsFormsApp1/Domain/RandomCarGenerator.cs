@@ -31,7 +31,7 @@ namespace WindowsFormsApp1.Domain
         {
             var img = (Bitmap) ((Bitmap) CarModels.GetValue(Random.Next(CarModels.Length))).Clone();
             img.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            return new Car(Locations[Random.Next(0, Locations.Length)], img);
+            return new Car(Locations[Random.Next(0, Locations.Length)], img, 20);
         }
     }
 }

@@ -37,7 +37,6 @@ namespace WindowsFormsApp1.Domain
 
         public void Stop()
         {
-            
             ChangeStage(GameStage.Stopped);
         }
     }
