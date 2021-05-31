@@ -15,10 +15,10 @@ namespace WindowsFormsApp1.Domain
         private const int MaxX = 1600;
         private const int MinX = 230;
 
-        public int Acceleration { get; } = 3;
+        private int Acceleration { get; } = 3;
         public HitBox HitBox { get; }
 
-        public Car(Point location, Bitmap image, int speed) : base(location, image)
+        public Car(Point location, Bitmap image, int speed = 20) : base(location, image)
         {
             Speed = speed;
             HitBox = new HitBox(this);
@@ -33,9 +33,6 @@ namespace WindowsFormsApp1.Domain
 
         }
 
-        private Car(Point location, Bitmap image) : this(location, image, 20)
-        {
-        }
         public Car(Point location, int speed) : this(location, Resources.Audi, speed)
         {
             

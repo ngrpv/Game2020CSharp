@@ -13,7 +13,7 @@ namespace WindowsFormsApp1.Domain
 
         #region Contrustors
 
-        public Roads(Point location1, Point location2, Point location3)
+        private Roads(Point location1, Point location2, Point location3)
         {
             (UpperRoad, MiddleRoad, LowerRoad) =
             (
@@ -24,7 +24,7 @@ namespace WindowsFormsApp1.Domain
             RoadsArray = new[] {UpperRoad, MiddleRoad, LowerRoad};
         }
 
-        public Roads(int middleRoadY) : this(
+        private Roads(int middleRoadY) : this(
             new(0, middleRoadY - PictureHeight), 
             new(0, 0),
             new(0, middleRoadY + PictureHeight))

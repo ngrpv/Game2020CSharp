@@ -16,7 +16,6 @@ namespace WindowsFormsApp1.Views
     {
         private Game game;
         private const int MinBotsGeneratingTime = 300;
-        private int _botsGeneratingFrequence = 1000;
         private const int BotsMinSpeed = 5;
         private int botsArrayPointer;
 
@@ -56,8 +55,8 @@ namespace WindowsFormsApp1.Views
                 Invalidate();
             };
             timer.Start();
-            var botsFrerquenceIncreasingTimer = new Timer {Interval = 100};
-            botsFrerquenceIncreasingTimer.Tick += (_, _) =>
+            var botsFrequenceIncreasingTimer = new Timer {Interval = 100};
+            botsFrequenceIncreasingTimer.Tick += (_, _) =>
             {
                 if (game.IsOver)
                 {
@@ -67,7 +66,7 @@ namespace WindowsFormsApp1.Views
                 if (game.BotsGeneratingFrequence > MinBotsGeneratingTime)
                     game.BotsGeneratingFrequence -= 1;
             };
-            botsFrerquenceIncreasingTimer.Start();
+            botsFrequenceIncreasingTimer.Start();
 
 
             Paint += (_, e) =>
@@ -124,7 +123,6 @@ namespace WindowsFormsApp1.Views
             };
             toMenuButton.Click += (_, _) =>
             {
-                _botsGeneratingFrequence = 1200;
                 game.Stop();
             };
             restartButton.Click += (_, _) =>
@@ -152,7 +150,6 @@ namespace WindowsFormsApp1.Views
             game.IsOver = true;
             Controls.Clear();
             game.Start();
-            _botsGeneratingFrequence = 1200;
         }
 
         #region KeysHandler
@@ -257,7 +254,7 @@ namespace WindowsFormsApp1.Views
         {
             while (!game.IsOver)
             {
-                Thread.Sleep(_botsGeneratingFrequence);
+                Thread.Sleep(game.BotsGeneratingFrequence);
                 var car = RandomCarGenerator.GetRandomCar();
                 game.Bots[botsArrayPointer] = car;
                 if (++botsArrayPointer >= game.Bots.Length) botsArrayPointer = 0;

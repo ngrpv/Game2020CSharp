@@ -4,7 +4,7 @@ namespace WindowsFormsApp1.Domain
 {
     public abstract class VisualizeableObject
     {
-        protected Point _location;
+        private Point _location;
         public Bitmap Image { get; }
 
         protected VisualizeableObject(Point location, Bitmap image)

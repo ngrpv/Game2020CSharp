@@ -5,7 +5,7 @@ namespace WindowsFormsApp1.Views
 {
     public  partial class MainForm : Form
     {
-        private Game game;
+        private readonly Game game;
 
         public MainForm()
         {
