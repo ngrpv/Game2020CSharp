@@ -11,6 +11,8 @@ namespace WindowsFormsApp1.Domain
         public Roads Roads;
         public readonly GameOptions Options = new ();
         public Car[] Bots;
+        public const int MinBotsGeneratingTime = 300;
+        public int BotsGeneratingFrequence = 1000;
         public bool IsOver { get; set; }
         
         public event Action<GameStage> StageChanged;
@@ -39,6 +41,7 @@ namespace WindowsFormsApp1.Domain
         public void Stop()
         {
             StopMusic();
+            BotsGeneratingFrequence = 1200;
             ChangeStage(GameStage.Stopped);
         }
         public void StopMusic()

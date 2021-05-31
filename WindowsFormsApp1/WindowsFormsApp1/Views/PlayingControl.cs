@@ -63,10 +63,10 @@ namespace WindowsFormsApp1.Views
                 if (game.IsOver)
                 {
                     timer.Stop();
-                    BotsGeneratingFrequence = 1200;
+                    game.BotsGeneratingFrequence = 1200;
                 }
-                if (BotsGeneratingFrequence > MinBotsGeneratingTime)
-                    BotsGeneratingFrequence -= 1;
+                if (game.BotsGeneratingFrequence > MinBotsGeneratingTime)
+                    game.BotsGeneratingFrequence -= 1;
             };
             botsFrerquenceIncreasingTimer.Start();
 
