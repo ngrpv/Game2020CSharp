@@ -16,8 +16,8 @@ namespace WindowsFormsApp1.Views
     public partial class PlayingControl : UserControl, IControl
     {
         private Game game;
-
-        private const int BotsGeneratingFrequence = 1000;
+        private const int MinBotsGeneratingTime = 300;
+        private int BotsGeneratingFrequence = 1000;
         private const int BotsMinSpeed = 5;
         private int botsArrayPointer;
 
@@ -50,13 +50,20 @@ namespace WindowsFormsApp1.Views
         private void InitializeGameObjects()
         {
             DoubleBuffered = true;
-            var timer = new Timer {Interval = 50};
+            var timer = new Timer {Interval = 5};
             timer.Tick += (_, _) =>
             {
                 if (game.IsOver) timer.Stop();
                 Invalidate();
             };
             timer.Start();
+            var botsFrerquenceIncreasingTimer = new Timer {Interval = 100};
+            botsFrerquenceIncreasingTimer.Tick += (_, _) =>
+            {
+                if (BotsGeneratingFrequence > MinBotsGeneratingTime)
+                    BotsGeneratingFrequence -= 1;
+            };
+            botsFrerquenceIncreasingTimer.Start();
 
 
             Paint += (_, e) =>
@@ -247,7 +254,7 @@ namespace WindowsFormsApp1.Views
                 if (++botsArrayPointer >= game.Bots.Length) botsArrayPointer = 0;
                 Task.Run(() =>
                 {
-                    while (car.Location.Y < 1100)
+                    while (car.Location.Y < 1500)
                     {
                         Thread.Sleep(20);
                         if (game.Car != null)
