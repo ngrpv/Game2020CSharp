@@ -144,6 +144,7 @@ namespace WindowsFormsApp1.Views
             game.IsOver = true;
             Controls.Clear();
             game.Start();
+            BotsGeneratingFrequence = 1200;
         }
 
         #region KeysHandler
@@ -239,8 +240,8 @@ namespace WindowsFormsApp1.Views
         {
             while (!game.IsOver)
             {
-                Thread.Sleep(50);
-                roads.ShiftDown((int) (game.Car.Speed * 0.7));
+                Thread.Sleep(10);
+                roads.ShiftDown((int) (game.Car.Speed * 0.125));
             }
         }
 
