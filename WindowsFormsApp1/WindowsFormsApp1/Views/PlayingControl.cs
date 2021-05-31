@@ -60,6 +60,11 @@ namespace WindowsFormsApp1.Views
             var botsFrerquenceIncreasingTimer = new Timer {Interval = 100};
             botsFrerquenceIncreasingTimer.Tick += (_, _) =>
             {
+                if (game.IsOver)
+                {
+                    timer.Stop();
+                    BotsGeneratingFrequence = 1200;
+                }
                 if (BotsGeneratingFrequence > MinBotsGeneratingTime)
                     BotsGeneratingFrequence -= 1;
             };
