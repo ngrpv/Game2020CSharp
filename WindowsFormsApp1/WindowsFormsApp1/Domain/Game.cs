@@ -6,7 +6,7 @@ namespace WindowsFormsApp1.Domain
 {
     public class Game
     {
-        public GameStage Stage { get; private set; } = GameStage.NotStarted;
+        private GameStage Stage { get; set; } = GameStage.NotStarted;
         public Car Car;
         public Roads Roads;
         public readonly GameOptions Options = new ();
@@ -23,7 +23,7 @@ namespace WindowsFormsApp1.Domain
             StageChanged?.Invoke(Stage);
         }
 
-        public void Start(Car car)
+      private void Start(Car car)
         {
             Roads = new Roads();
             Car = car;

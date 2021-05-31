@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,7 +16,7 @@ namespace WindowsFormsApp1.Views
     {
         private Game game;
         private const int MinBotsGeneratingTime = 300;
-        private int BotsGeneratingFrequence = 1000;
+        private int _botsGeneratingFrequence = 1000;
         private const int BotsMinSpeed = 5;
         private int botsArrayPointer;
 
@@ -99,7 +98,7 @@ namespace WindowsFormsApp1.Views
                 Task.Run(action);
         }
 
-        public void Freeze()
+        private void Freeze()
         {
             game.IsOver = true;
             Thread.Sleep(5);
@@ -125,7 +124,7 @@ namespace WindowsFormsApp1.Views
             };
             toMenuButton.Click += (_, _) =>
             {
-                BotsGeneratingFrequence = 1200;
+                _botsGeneratingFrequence = 1200;
                 game.Stop();
             };
             restartButton.Click += (_, _) =>
@@ -153,7 +152,7 @@ namespace WindowsFormsApp1.Views
             game.IsOver = true;
             Controls.Clear();
             game.Start();
-            BotsGeneratingFrequence = 1200;
+            _botsGeneratingFrequence = 1200;
         }
 
         #region KeysHandler
@@ -258,7 +257,7 @@ namespace WindowsFormsApp1.Views
         {
             while (!game.IsOver)
             {
-                Thread.Sleep(BotsGeneratingFrequence);
+                Thread.Sleep(_botsGeneratingFrequence);
                 var car = RandomCarGenerator.GetRandomCar();
                 game.Bots[botsArrayPointer] = car;
                 if (++botsArrayPointer >= game.Bots.Length) botsArrayPointer = 0;
@@ -268,7 +267,7 @@ namespace WindowsFormsApp1.Views
                     {
                         Thread.Sleep(20);
                         if (game.Car != null)
-                            car.ShiftDown((int) (car.Speed  + BotsMinSpeed + game.Car.Speed));
+                            car.ShiftDown(car.Speed  + BotsMinSpeed + game.Car.Speed);
                     }
                 });
             }

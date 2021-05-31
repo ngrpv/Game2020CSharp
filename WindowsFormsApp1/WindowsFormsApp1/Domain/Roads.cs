@@ -8,7 +8,7 @@ namespace WindowsFormsApp1.Domain
         private RoadPattern MiddleRoad { get; set; }
         private RoadPattern LowerRoad { get; set; }
         public readonly RoadPattern[] RoadsArray;
-        private static readonly int PictureHeight = 1000;
+        private const int PictureHeight = 1000;
         private static readonly int ClientHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size.Height;
 
         #region Contrustors

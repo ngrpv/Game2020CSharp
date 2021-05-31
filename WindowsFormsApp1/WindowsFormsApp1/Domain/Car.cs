@@ -1,6 +1,4 @@
 ﻿using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
 using WindowsFormsApp1.Properties;
 using Timer = System.Windows.Forms.Timer;
 
@@ -8,9 +6,9 @@ namespace WindowsFormsApp1.Domain
 {
     public class Car : VisualizeableObject
     {
-        public int Speed { get; private set; } = 20;
-        public readonly int MinSpeed = 10;
-        public readonly int MaxSpeed = 65;
+        public int Speed { get; private set; }
+        private const int MinSpeed = 10;
+        private const int MaxSpeed = 65;
         public bool IsBot = true;
         private const int MaxY = 1030;
         private const int MinY = 700;
@@ -24,8 +22,7 @@ namespace WindowsFormsApp1.Domain
         {
             Speed = speed;
             HitBox = new HitBox(this);
-            var timer = new Timer();
-            timer.Interval = 50;
+            var timer = new Timer {Interval = 50};
             timer.Tick += (_, _) =>
             {
                 if (Speed > MinSpeed)
@@ -36,7 +33,7 @@ namespace WindowsFormsApp1.Domain
 
         }
 
-        public Car(Point location, Bitmap image) : this(location, image, 20)
+        private Car(Point location, Bitmap image) : this(location, image, 20)
         {
         }
         public Car(Point location, int speed) : this(location, Resources.Audi, speed)

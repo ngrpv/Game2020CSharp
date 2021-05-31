@@ -6,7 +6,6 @@
         Options,
         Selection,
         Playing,
-        Finished,
         Updated,
         Stopped,
         Freezed

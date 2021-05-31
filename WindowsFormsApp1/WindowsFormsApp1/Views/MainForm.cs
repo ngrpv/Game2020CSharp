@@ -23,10 +23,6 @@ namespace WindowsFormsApp1.Views
             {
                 case GameStage.Options:
                     ShowScreen(optionsControl);
-                    game.Options.Volume /= 10;
-                    break;
-                case GameStage.Finished:
-                    //ShowFinishedScreen();
                     break;
                 case GameStage.NotStarted:
                     ShowScreen(menuControl);
@@ -39,7 +35,6 @@ namespace WindowsFormsApp1.Views
                 case GameStage.Updated:
                     break;
                 case GameStage.Stopped:
-                    /*playingControl.InitializeGameObjects();*/
                     playingControl.Stop();
                     ShowScreen(menuControl);
                     break;

@@ -6,20 +6,16 @@ namespace WindowsFormsApp1.Domain
     {
         private readonly int difference;
         private Rectangle box;
-        public Point Location
-        {
-            get => box.Location; 
-        }
+        public Point Location => box.Location;
 
         public HitBox(Car car) : this(car, 0)
-        {/*
-            box = new(car.Location.X + difference, car.Location.Y + difference, car.Image.Width - difference,
-                car.Image.Height - difference);*/
+        {
         }
-        public HitBox(Car car, int difference)
+
+        private HitBox(Car car, int difference)
         {
             this.difference = difference;
-            box = new(car.Location.X + difference, car.Location.Y + difference, car.Image.Width - difference,
+            box = new Rectangle(car.Location.X + difference, car.Location.Y + difference, car.Image.Width - difference,
                 car.Image.Height - difference);
         }
 
