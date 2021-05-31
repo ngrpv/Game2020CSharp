@@ -40,6 +40,11 @@ namespace WindowsFormsApp1.Views
             InitializeGameObjects();
         }
 
+        private void StopPlayer()
+        {
+            game.StopMusic();
+        }
+
         
 
         private void InitializeGameObjects()
@@ -86,7 +91,7 @@ namespace WindowsFormsApp1.Views
         {
             game.IsOver = true;
             Thread.Sleep(5);
-            game.StopMusic();
+            BeginInvoke((Action)(StopPlayer));
             var gameOverPanel = new Panel()
             {
                 BackgroundImage = Resources.gameovertext,

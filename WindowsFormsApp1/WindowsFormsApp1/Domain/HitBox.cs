@@ -11,7 +11,7 @@ namespace WindowsFormsApp1.Domain
             get => box.Location; 
         }
 
-        public HitBox(Car car) :this(car, 0)
+        public HitBox(Car car) : this(car, 0)
         {/*
             box = new(car.Location.X + difference, car.Location.Y + difference, car.Image.Width - difference,
                 car.Image.Height - difference);*/

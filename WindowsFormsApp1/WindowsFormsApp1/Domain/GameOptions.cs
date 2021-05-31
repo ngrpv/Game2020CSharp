@@ -14,7 +14,7 @@ namespace WindowsFormsApp1.Domain
         
         public GameOptions()
         {
-            MediaPlayer.Open(new Uri(@"C:\Users\Garipov\Desktop\C#Game\Game\WindowsFormsApp1\WindowsFormsApp1\Resources\Tron-Legacy.wav"));
+            MediaPlayer.Open(new Uri(@"C:\Users\Garipov\Desktop\C#Game\Game\WindowsFormsApp1\WindowsFormsApp1\Resources\Dior.wav"));
             //Volume = 1;
             //  s.Volume /= 2;
         }

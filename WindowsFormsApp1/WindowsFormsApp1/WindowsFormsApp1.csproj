@@ -57,8 +57,6 @@
     <Compile Include="Domain\RandomCarGenerator.cs" />
     <Compile Include="Domain\Roads.cs" />
     <Compile Include="Domain\VisualizeableObject.cs" />
-    <Compile Include="Domain\Player.cs" />
-    <Compile Include="Domain\Race.cs" />
     <Compile Include="Domain\RoadPattern.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -162,6 +160,7 @@
     <Content Include="Resources\start.png" />
     <Content Include="Resources\taxi1.png" />
     <Content Include="Resources\truck1.png" />
+    <Content Include="Resources\Dior.wav" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="MediaPlayer">

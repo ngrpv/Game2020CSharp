@@ -10,7 +10,7 @@ namespace WindowsFormsApp1.Domain
     {
         public int Speed { get; private set; } = 20;
         public readonly int MinSpeed = 10;
-        public readonly int MaxSpeed = 70;
+        public readonly int MaxSpeed = 65;
         public bool IsBot = true;
         private const int MaxY = 1030;
         private const int MinY = 700;
@@ -29,13 +29,19 @@ namespace WindowsFormsApp1.Domain
             timer.Tick += (_, _) =>
             {
                 if (Speed > MinSpeed)
-                    Speed -= 1;
+                        
+                    Speed -= 3;
             };
             timer.Start();
+
         }
 
         public Car(Point location, Bitmap image) : this(location, image, 20)
         {
+        }
+        public Car(Point location, int speed) : this(location, Resources.Audi, speed)
+        {
+            
         }
 
         public Car(Point location) : this(location, Resources.Audi)

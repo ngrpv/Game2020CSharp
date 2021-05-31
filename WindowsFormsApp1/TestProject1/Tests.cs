@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.Versioning;
+using System.Threading;
 using WindowsFormsApp1.Domain;
 using WindowsFormsApp1.Views;
 using NUnit.Framework;
@@ -22,11 +23,28 @@ namespace TestProject1
             Assert.AreEqual(new Point(hitboxLocation0.X+dx, hitboxLocation0.Y+dy), car.HitBox.Location);
         }
 
-        public void Move_ShouldMoveHitboxToo(int x0, int y0, int dx, int dy)
+        [Test]
+        public void IsCollide()
         {
-            var car = new Car(new Point(x0, y0));
-            car.Move(dx,dy);
-            //Assert.AreEqual();
+            var car1 = new Car(new Point(0, 0));
+            var car2 = new Car(new Point(0, 0));
+            Assert.True(car1.HitBox.IsCollide(car2.HitBox));
+        }
+        [Test]
+        public void IsNotCollide()
+        {
+            var car1 = new Car(new Point(0, 0));
+            var car2 = new Car(new Point(500, 500));
+            Assert.False(car1.HitBox.IsCollide(car2.HitBox));
+        }
+
+        [Test]
+        public void SlowsDownByTimer()
+        {
+            var startSpeed = 40;
+            var car = new Car(new Point(500, 500), startSpeed);
+            Thread.Sleep(200);
+            Assert.IsTrue(car.Speed < startSpeed);
         }
     }
 }
