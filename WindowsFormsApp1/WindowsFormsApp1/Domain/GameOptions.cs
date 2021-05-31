@@ -18,6 +18,18 @@ namespace WindowsFormsApp1.Domain
             //Volume = 1;
             //  s.Volume /= 2;
         }
+
+        public void StopPLayer()
+        {
+            MediaPlayer.Stop();
+        }
+
+        public void Play()
+        {
+         //   MediaPlayer.Stop();
+            MediaPlayer.Volume = 50;
+            MediaPlayer.Play();
+        }
         
         public void Open()
         {

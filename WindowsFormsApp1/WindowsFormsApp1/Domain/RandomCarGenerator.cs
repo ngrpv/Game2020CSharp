@@ -13,8 +13,8 @@ namespace WindowsFormsApp1.Domain
         {
             new(300, BotsStartY), 
             new(450, BotsStartY), 
-            new(600, BotsStartY), 
-            new(750, BotsStartY),
+            new(650, BotsStartY), 
+            new(800, BotsStartY),
             new(1000, BotsStartY), 
             new(1130, BotsStartY), 
             new(1350, BotsStartY),

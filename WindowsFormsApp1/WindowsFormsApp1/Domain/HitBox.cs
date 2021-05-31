@@ -6,11 +6,15 @@ namespace WindowsFormsApp1.Domain
     {
         private readonly int difference;
         private Rectangle box;
-
-        public HitBox(Car car)
+        public Point Location
         {
+            get => box.Location; 
+        }
+
+        public HitBox(Car car) :this(car, 0)
+        {/*
             box = new(car.Location.X + difference, car.Location.Y + difference, car.Image.Width - difference,
-                car.Image.Height - difference);
+                car.Image.Height - difference);*/
         }
         public HitBox(Car car, int difference)
         {
@@ -19,14 +23,11 @@ namespace WindowsFormsApp1.Domain
                 car.Image.Height - difference);
         }
 
-        public bool IsCollide(HitBox otherHitbox)
-        {
-            return box.IntersectsWith(otherHitbox.box);
-        }
+        public bool IsCollide(HitBox otherHitbox) => box.IntersectsWith(otherHitbox.box);
 
-        public void Refresh(Point location)
+        public void Refresh(int dx, int dy)
         {
-            box.Location = location;
+            box.Location = new Point(box.Location.X+dx, box.Location.Y+dy);
         }
     }
 }

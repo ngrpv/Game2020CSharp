@@ -20,7 +20,6 @@ namespace WindowsFormsApp1.Views
         private const int BotsGeneratingFrequence = 1000;
         private const int BotsMinSpeed = 5;
         private int botsArrayPointer;
-        private bool gameIsOver;
 
         private bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
 
@@ -37,9 +36,11 @@ namespace WindowsFormsApp1.Views
         public void Configure(Game game)
         {
             this.game = game;
-            gameIsOver = false;
+            game.IsOver = false;
             InitializeGameObjects();
         }
+
+        
 
         private void InitializeGameObjects()
         {
@@ -47,7 +48,7 @@ namespace WindowsFormsApp1.Views
             var timer = new Timer {Interval = 50};
             timer.Tick += (_, _) =>
             {
-                if (gameIsOver) timer.Stop();
+                if (game.IsOver) timer.Stop();
                 Invalidate();
             };
             timer.Start();
@@ -83,8 +84,9 @@ namespace WindowsFormsApp1.Views
 
         public void Freeze()
         {
-            gameIsOver = true;
+            game.IsOver = true;
             Thread.Sleep(5);
+            game.StopMusic();
             var gameOverPanel = new Panel()
             {
                 BackgroundImage = Resources.gameovertext,
@@ -116,7 +118,7 @@ namespace WindowsFormsApp1.Views
 
         public void Stop()
         {
-            gameIsOver = true;
+            game.IsOver = true;
             Controls.Clear();
         }
 
@@ -127,7 +129,7 @@ namespace WindowsFormsApp1.Views
 
         private void Restart()
         {
-            gameIsOver = true;
+            game.IsOver = true;
             Controls.Clear();
             game.Start();
         }
@@ -165,7 +167,8 @@ namespace WindowsFormsApp1.Views
         {
             if (args.KeyCode == Keys.Escape)
             {
-                game.Stop();
+                Freeze();
+                //game.Stop();
             }
 
             switch (args.KeyCode)
@@ -213,7 +216,7 @@ namespace WindowsFormsApp1.Views
 
         private void UpdateCar()
         {
-            while (!gameIsOver)
+            while (!game.IsOver)
             {
                 Thread.Sleep(5);
                 game.Car.Move((int) steering, (int) (throttle + brakes));
@@ -222,7 +225,7 @@ namespace WindowsFormsApp1.Views
 
         private void MoveRoad(Roads roads)
         {
-            while (!gameIsOver)
+            while (!game.IsOver)
             {
                 Thread.Sleep(50);
                 roads.ShiftDown((int) (game.Car.Speed * 0.7));
@@ -231,7 +234,7 @@ namespace WindowsFormsApp1.Views
 
         private void RandomCarGenerate()
         {
-            while (!gameIsOver)
+            while (!game.IsOver)
             {
                 Thread.Sleep(BotsGeneratingFrequence);
                 var car = RandomCarGenerator.GetRandomCar();
@@ -251,7 +254,7 @@ namespace WindowsFormsApp1.Views
 
         private void CheckCollisions()
         {
-            while (!gameIsOver)
+            while (!game.IsOver)
             {
                 Thread.Sleep(20);
                 foreach (var bot in game.Bots.Where(b => b != null))

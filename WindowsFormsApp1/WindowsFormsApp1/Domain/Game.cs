@@ -11,6 +11,7 @@ namespace WindowsFormsApp1.Domain
         public Roads Roads;
         public readonly GameOptions Options = new ();
         public Car[] Bots;
+        public bool IsOver { get; set; }
         
         public event Action<GameStage> StageChanged;
 
@@ -37,7 +38,12 @@ namespace WindowsFormsApp1.Domain
 
         public void Stop()
         {
+            StopMusic();
             ChangeStage(GameStage.Stopped);
+        }
+        public void StopMusic()
+        {
+            Options.StopPLayer();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace WindowsFormsApp1.Domain
     {
         public int Speed { get; private set; } = 20;
         public readonly int MinSpeed = 10;
-        public readonly int MaxSpeed = 50;
+        public readonly int MaxSpeed = 70;
         public bool IsBot = true;
         private const int MaxY = 1030;
         private const int MinY = 700;
@@ -23,7 +23,7 @@ namespace WindowsFormsApp1.Domain
         public Car(Point location, Bitmap image, int speed) : base(location, image)
         {
             Speed = speed;
-            HitBox = new HitBox(this, 15);
+            HitBox = new HitBox(this);
             var timer = new Timer();
             timer.Interval = 50;
             timer.Tick += (_, _) =>
@@ -38,7 +38,7 @@ namespace WindowsFormsApp1.Domain
         {
         }
 
-        public Car(Point location) : base(location, Resources.Audi)
+        public Car(Point location) : this(location, Resources.Audi)
         {
         }
 
@@ -60,14 +60,16 @@ namespace WindowsFormsApp1.Domain
                 if (Location.Y > MaxY && dy > 0 || Location.Y < MinY && dy < 0) dy = 0;
             }
 
-            base.Move((int) (dx * 90 / 10), (int) (dy * Speed * 50 / 1000.0));
-            HitBox.Refresh(Location);
+            var dx1 = dx * 9;
+            var dy1 = (int)(dy * Speed * 5 / 100.0);
+            base.Move(dx1, dy1);
+            HitBox.Refresh(dx1,dy1);
         }
 
         public void ShiftDown(int dy)
         {
-            Move(0, dy);
-            HitBox.Refresh(Location);
+            Move(0, dy); 
+            //HitBox.Refresh(Location);
         }
     }
 }
