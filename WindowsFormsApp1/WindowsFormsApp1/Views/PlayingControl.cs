@@ -118,7 +118,11 @@ namespace WindowsFormsApp1.Views
                 Location = new(200, 239), 
                 SizeMode = PictureBoxSizeMode.AutoSize
             };
-            toMenuButton.Click += (_, _) => game.Stop();
+            toMenuButton.Click += (_, _) =>
+            {
+                BotsGeneratingFrequence = 1200;
+                game.Stop();
+            };
             restartButton.Click += (_, _) =>
             {
                 Restart();
@@ -241,7 +245,7 @@ namespace WindowsFormsApp1.Views
             while (!game.IsOver)
             {
                 Thread.Sleep(10);
-                roads.ShiftDown((int) (game.Car.Speed * 0.125));
+                roads.ShiftDown((int) (game.Car.Speed * 0.2));
             }
         }
 
